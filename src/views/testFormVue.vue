@@ -31,6 +31,8 @@
     box-sizing: border-box;
     width: 70vw;
     margin: 6vw auto;
+    color: white;
+    opacity: 1;
   }
   
   </style>

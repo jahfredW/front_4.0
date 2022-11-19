@@ -27,6 +27,11 @@ const router = createRouter({
       path: '/contact',
       name: 'caca',
       component: () => import('../views/testFormVue.vue')
+    },
+    {
+      path: '/thanks',
+      name: 'thanks',
+      component: () => import('../views/ThanksView.vue')
     }
   ]
 })

@@ -82,7 +82,7 @@
           to:'/'
         },
         {
-          title: 'Projets Persos >',
+          title: 'En développement >',
           icon: 'mdi-ghost-outline',
           to:'/projets/perso',
         },
@@ -94,9 +94,9 @@
         },
 
         {
-          title: 'A propos >',
+          title: 'Mon stack >',
           icon: 'mdi-sheep',
-          to: '/about',
+          to: '/stack',
         },
 
         {
@@ -131,6 +131,10 @@
   color: white;
 }
 
+#para {
+  min-height: 100vh;
+}
+
 
 
 #footer {
@@ -138,7 +142,8 @@
 }
 
 @media screen and (max-width: 450px){
-  
+ 
+
 
   #bouton-footer {
     width: 100px;

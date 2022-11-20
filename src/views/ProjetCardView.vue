@@ -1,10 +1,11 @@
 <template>
   <v-container class="container has-text-centered">
     <v-row class="custom is-justify-content-space-evenly">
-    <v-col class="custom-col " 
+    <v-col class="custom-col "
     v-for="item in this.testprop"
    >
       <ProjetCard
+      
         :projectTitle = item>
       </ProjetCard>
     </v-col>
@@ -27,7 +28,7 @@
     ProjetCard,
 },
    data : () => ({
-    testprop: ['video_converter', 'Bold_Air', 'parc_finder']
+    testprop: ['audioConverter', 'boldair', 'parcFinder']
 })
   });
 </script>

@@ -43,6 +43,7 @@
     ></v-text-field>
 
     <v-select
+    transition="slide-x-transition"
       v-model="question"
       :items="items"
       :rules="[v => !!v || 'Item is required']"

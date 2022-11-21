@@ -11,7 +11,7 @@
     mdi-information-variant
     </v-icon>
     Envoyez moi vos coordonnées en remplissant 
-    le formulaire ci-dessous !
+    le formulaire ci-dessous ! Je vous répondrai dans les meilleurs délais :)
   </v-banner>
   <v-form
     id="form"
@@ -23,7 +23,7 @@
       v-model="name"
       :counter="10"
       :rules="nameRules"
-      label="Name"
+      label="Nom"
       required
     ></v-text-field>
 
@@ -31,7 +31,7 @@
       v-model="surname"
       :counter="10"
       :rules="surnameRules"
-      label="Surname"
+      label="Prénom"
       required
     ></v-text-field>
 
@@ -47,14 +47,14 @@
       v-model="question"
       :items="items"
       :rules="[v => !!v || 'Item is required']"
-      label="Item"
+      label="Votre demande :"
       required
     ></v-select>
 
     <v-checkbox
       v-model="agree"
       :rules="[v => !!v || 'You must agree to continue!']"
-      label="Do you agree?"
+      label="Je suis d'accord *"
       required
     ></v-checkbox>
   <div id="button">
@@ -85,15 +85,34 @@
   </div>
     
   </v-form>
+  <div class="mt-10">
+    <p v-if=this.agree>
+      * en cochant cette case, j'accepte que mes informations personnelles soient 
+      communiquée à fredgruwedev.com, informations susceptibles d'être sauvegardées
+      en base de données pour une durée maximale de 14 jours. 
+    </p>
+  </div>
 </template>
 
 <script>
+import { useUrldevStore } from '../stores/url'
 
 import axios from 'axios'
 import router from '../router/index'
 
 
   export default {
+
+      setup: () => {
+        const store = useUrldevStore()
+        const urlMain = store.urlMain
+        const ipMain = store.ipMain
+        const portMAin = store.portMain
+
+        return {urlMain, ipMain, portMAin}
+      },
+
+
     data: () => ({
       valid: true,
       name: '',
@@ -109,10 +128,10 @@ import router from '../router/index'
       ],
       question: null,
       items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
+        'Recrutement',
+        'Devis',
+        'Renseignement',
+        'Autre demande',
       ],
       agree: false,
     }),
@@ -143,7 +162,7 @@ import router from '../router/index'
             question : this.question,
             agree : this.agree
           }
-          axios.post("http://127.0.0.1:3000/api/members", 
+          axios.post(this.urlMain, 
           
             formData
           )

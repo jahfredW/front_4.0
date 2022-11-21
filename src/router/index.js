@@ -32,7 +32,7 @@ const router = createRouter({
       path: '/thanks',
       name: 'thanks',
       component: () => import('../views/ThanksView.vue')
-    }
+    },
   ]
 })
 

@@ -1,6 +1,6 @@
 <template>
   <v-container id="main">
-    <v-row class="text-center mt-16">
+    <v-row class="text-center mt-10">
       <!-- <v-col cols="12">
         <v-img id="photo"
           :src="logo"
@@ -11,22 +11,22 @@
       </v-col> -->
 
       <v-col class="my-4">
-        <h1 class="display-2 font-weight-bold my-3 is-size-2 ">
+        <h1 class="display-2 font-weight-bold mt-3 mb-17 is-size-2 ">
           Bienvenue sur fredgruwedev.com 
         </h1>
 
 
 
-        <p class="subheading font-weight-regular my-5">
+        <p class="subheading font-weight-regular mt-10 mb-10">
           Developpeur Web full Stack,
           <br>
           A votre écoute pour la réalisation de vos projets
-          web et web mobile.
-
+          web et web mobile,
         </p>
+        <p>Pour que vos idées prennent vie.</p>
       </v-col>
 
-      <v-col class="mb-5" cols="12">
+      <!-- <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-6">
           Qui suis-je?
         </h2>
@@ -36,76 +36,32 @@
             {{ next.text }}
           </a>
         </v-row>
-      </v-col>
-
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-6">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <div v-for="(link, i) in importantLinks" :key="i"  link class="subheading mx-3"
-            target="_blank">
-            <div>
-              <v-icon style="color : #65F9FE;">
-                {{ link.icon }}
-              </v-icon>
-            </div>
-            <div>
-              <a :href="link.href">
-                {{ link.text }}
-              </a>
-            </div>
-
-
-          </div>
-        </v-row>
-      </v-col>
+      </v-col> -->
+      
+    
     </v-row>
   </v-container>
 </template>
 
 <script>
-import logo from '../assets/photo_id.png'
+import logo from '../assets/logo.png'
+
 
 export default {
   name: 'HelloWorld',
   
   // data : renvoie un litterale d'objet // 
   data: () => ({
+    logo,
     
-    importantLinks: [
-      {
-        icon: 'mdi-facebook',
-        text: 'Facebook',
-        href: 'https://community.vuetifyjs.com',
-      },
-      {
-        icon: 'mdi-twitter',
-        text: 'Twitter',
-        href: 'https://twitter.com/vuetifyjs',
-      },
-      {
-        icon: 'mdi-linkedin',
-        text: 'Linked-in',
-        href: 'https://www.linkedin.com/in/fredericgruwe/',
-      },
-      {
-        icon: 'mdi-github',
-        text: 'Github',
-        href: 'https://github.com/jahfredW',
-      },
-    ],
+    
     logo,
     whatsNext: [
       {
         text: 'Mon parcours',
-        href: 'https://vuetifyjs.com',
+        href: '/presentation',
       },
-      {
-        text: 'Questions fréquentes',
-        href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-      },
+      
     ],
   }),
 }

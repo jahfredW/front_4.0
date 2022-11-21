@@ -28,7 +28,7 @@
     ProjetCard,
 },
    data : () => ({
-    testprop: ['audioConverter', 'boldair', 'parcFinder']
+    testprop: ['Video_Converter', 'boldair', 'parcFinder']
 })
   });
 </script>

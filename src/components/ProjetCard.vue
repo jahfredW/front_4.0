@@ -1,13 +1,30 @@
 <template>
     <v-card 
+      
       class="mx-auto has-text-centered mb-10"
-      style="  background-color: #ededf4;"
+      style="  background-color: transparent; color: whitesmoke; border: 1px solid #004F8B ;"
       
     >
     <v-carousel :show-arrows="false" style="height: 45vh;"  >
     <v-carousel-item v-if="this.projectTitle === 'boldair'"
         v-for="(item,i) in boldair"
       :key="i"
+      :src= item.src
+      reverse-transition="fade-transition"
+      transition="fade-transition"
+    ></v-carousel-item>
+
+    <v-carousel-item v-else-if="this.projectTitle === 'Video_Converter'"
+        v-for="(item,j) in audio_converter"
+      :key="j"
+      :src= item.src
+      reverse-transition="fade-transition"
+      transition="fade-transition"
+    ></v-carousel-item>
+
+    <v-carousel-item v-else-if="this.projectTitle === 'parcFinder'"
+        v-for="(item,k) in parc_finder"
+      :key="k"
       :src= item.src
       reverse-transition="fade-transition"
       transition="fade-transition"
@@ -22,7 +39,9 @@
       <v-card-actions>
         <v-btn
           color="orange lighten-2"
-          text
+          :href= "to" 
+          link
+          
         >
           En savoir plus
         </v-btn>
@@ -48,7 +67,7 @@
             Codé en Python, FastApi et VueJS.
             
           </v-card-text>
-          <v-card-text v-else-if="this.projectTitle === 'audioConverter'">
+          <v-card-text v-else-if="this.projectTitle === 'Video_Converter'">
             Convertisseur Vidéo -> Audio.
             <br>
             Codé en Python via l'utilisation du Pattern Design Factory.
@@ -68,10 +87,10 @@
 <script>
 
 import neo from '../assets/neo.svg'
-import parc_finder from '../assets/parc_finder.png'
+import parc_finder from '../assets/parcFinder.png'
 import logo_scrappy from '../assets/logo_scrappy.png'
 import bold_air from '../assets/aqp.png'
-import video_converter from '../assets/video_converter.png'
+import audio from '../assets/audio_converter.png'
 import boldair1 from '../assets/boldair1.png'
 import boldair2 from '../assets/boldair3.png'
 import boldairCover from '../assets/boldaircover.png'
@@ -84,7 +103,9 @@ export default {
     parc_finder,
     logo_scrappy,
     bold_air,  
-    video_converter,
+    audio,
+    parc_finder,
+    to : 'https://github.com/jahfredW',
     
     setup : {
       image : "",
@@ -107,6 +128,20 @@ export default {
       {
         src: boldairCode
       }
+    ],
+
+    audio_converter : [
+      {
+        src: audio
+      },
+     
+    ],
+
+    parc_finder : [
+      {
+        src: parc_finder
+      },
+     
     ]
 
     

@@ -55,11 +55,24 @@
     </v-main>
 
     <v-footer app id="footer" padless image="cover.jpg">
-      <v-row justify="center" no-gutters class="is-mobile">
-        <v-col class="primary lighten-2 py-2 text-center has-text-white" cols="12">
-          {{ new Date().getFullYear() }} — <strong class="has-text-white">Fg Dev</strong>
-        </v-col>
-      </v-row>
+      <v-row justify="center">
+          <div id="links" v-for="(link, i) in importantLinks" :key="i"  link class="subheading mx-3"
+            target="_blank">
+            <div class="pr-1">
+              <v-icon style="color : #65F9FE;">
+                {{ link.icon }}
+              </v-icon>
+            </div>
+            <div>
+              <a :href="link.href">
+                {{ link.text }}
+              </a>
+            </div>
+
+
+          </div>
+        </v-row>
+     
     </v-footer>
   </v-app>
   
@@ -74,6 +87,28 @@
 
     data: () => ({ 
       drawer: null,
+      importantLinks: [
+      {
+        icon: 'mdi-facebook',
+        text: 'Facebook',
+        href: 'https://www.facebook.com/profile.php?id=100088179605430',
+      },
+      // {
+      //   icon: 'mdi-twitter',
+      //   text: 'Twitter',
+      //   href: 'https://twitter.com/vuetifyjs',
+      // },
+      {
+        icon: 'mdi-linkedin',
+        text: 'Linked-in',
+        href: 'https://www.linkedin.com/in/fredericgruwe/',
+      },
+      {
+        icon: 'mdi-github',
+        text: 'Github',
+        href: 'https://github.com/jahfredW',
+      },
+    ],
       
       items: [
         {
@@ -87,15 +122,10 @@
           to:'/projets/perso',
         },
 
-          {
-          title: 'Projet Pro >',
-          icon: 'mdi-alien-outline',
-          to: '/searchInstant',
-        },
 
         {
           title: 'Mon stack >',
-          icon: 'mdi-sheep',
+          icon: 'mdi-alien-outline',
           to: '/stack',
         },
 
@@ -126,6 +156,12 @@
 </script>
 
 <style>
+
+#links{
+  display: flex;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+}
 
 .is-mobile{
   color: white;

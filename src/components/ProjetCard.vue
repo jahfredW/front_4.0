@@ -2,7 +2,7 @@
     <v-card 
       
       class="mx-auto has-text-centered mb-10"
-      style="  background-color: transparent; color: whitesmoke; border: 1px solid #004F8B ;"
+      style="  background-color: transparent;  border: 1px solid #004F8B ;"
       
     >
     <v-carousel :show-arrows="false" style="height: 45vh;"  >

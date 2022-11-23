@@ -10,7 +10,7 @@ export const useUrldevStore = defineStore('url', () => {
 })
 
 export const useUrlprodStore = defineStore('url', () => {
-    const urlMain = "http://fredgruwedev.com/api/members"
+    const urlMain = "https://fredgruwedev.com/api/members"
     const ipMain = "fredgruwedev.com"
     const portMain = "8001"
   

@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { useUrldevStore } from '../stores/url'
+import { useUrlprodStore } from '../stores/url'
 
 import axios from 'axios'
 import router from '../router/index'
@@ -104,7 +104,7 @@ import router from '../router/index'
   export default {
 
       setup: () => {
-        const store = useUrldevStore()
+        const store = useUrlprodStore()
         const urlMain = store.urlMain
         const ipMain = store.ipMain
         const portMAin = store.portMain
@@ -192,7 +192,7 @@ import router from '../router/index'
   }
 
 #form{
-  color: white;
+  color: black;
 }
 
 @media screen and (max-width: 450px){

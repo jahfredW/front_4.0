@@ -1,5 +1,13 @@
 <template>
-  <HelloWorld />
+  <v-row>
+    <v-col cols="12">
+      <HelloWorld />
+    </v-col>
+  </v-row>
+  <div>
+    
+  </div>
+  
 </template>
 
 <script>

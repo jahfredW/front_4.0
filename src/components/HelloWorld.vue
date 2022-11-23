@@ -10,7 +10,7 @@
         />
       </v-col> -->
 
-      <v-col class="my-4">
+      <v-col class="my-4" cols="12">
         <h1 class="display-2 font-weight-bold mt-3 mb-17 is-size-2 ">
           Bienvenue sur fredgruwedev.com 
         </h1>
@@ -25,26 +25,22 @@
         </p>
         <p>Pour que vos idées prennent vie.</p>
       </v-col>
-
-      <!-- <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-6">
-          Qui suis-je?
-        </h2>
-
-        <v-row justify="center mb-5">
-          <a v-for="(next, i) in whatsNext" :key="i" :href="next.href" class="subheading mx-3" target="_blank">
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col> -->
-      
-    
+      <v-col cols="12" >
+        <div  >
+          <v-img class="mx-auto mt-16"
+            :src="logo"
+            max-height="150"
+            max-width="250" >
+        </v-img>
+        </div>
+        
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import logo from '../assets/logo.png'
+import logo from '../assets/fredgruwe.png'
 
 
 export default {
@@ -70,7 +66,6 @@ export default {
 <style>
 
 #main{
-  color: white;
   text-shadow: 1px pink;
  
 }

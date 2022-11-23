@@ -1,7 +1,7 @@
 <template class="is-mobile">
   
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app>
+    <v-navigation-drawer v-model="drawer" app style="background-color: #F2F9FD;">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6" id="menu">
@@ -39,19 +39,15 @@
 
     <v-app-bar id="app_bar" app image="header.jpg"  class="is-flex-direction-column">
       <v-app-bar-nav-icon color="white" @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <!-- <v-app-bar-title :title="titleSetter()" id="title" class="is-size-3 has-text-centered has-text-white ml-16 mb-15">
-      </v-app-bar-title> -->
       <v-app-bar-subtitle class="has-text-white">Menu</v-app-bar-subtitle>
 
     </v-app-bar>
 
-    <v-main>
-      <v-parallax id="para"
-    dark
-    src="../compo3.png"
-  >
+    <v-main id="main" style="background-color: #EBECF0">
+    
+  
       <router-view />
-      </v-parallax>
+  
     </v-main>
 
     <v-footer app id="footer" padless image="cover.jpg">
@@ -156,6 +152,11 @@
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Roboto:wght@300&display=swap');
+
+#main{
+  font-family: 'Poppins', sans-serif;
+}
 
 #links{
   display: flex;
@@ -175,11 +176,14 @@
 
 #footer {
   background-image: url("../cover.jpg");
+  padding: 1vw;
 }
 
 @media screen and (max-width: 450px){
  
-
+  #footer {
+  padding: 3vw;
+}
 
   #bouton-footer {
     width: 100px;
@@ -192,5 +196,7 @@
     height: 8vw;
   }
 }
+
+
 </style>
 

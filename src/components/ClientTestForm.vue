@@ -170,7 +170,6 @@ import router from '../router/index'
                 console.log(res.data)
                 router.push('/thanks')
                 
-                
 
             })
             .catch( (err) => {

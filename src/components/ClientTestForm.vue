@@ -162,7 +162,7 @@ import router from '../router/index'
             question : this.question,
             agree : this.agree
           }
-          axios.post(this.urlMain, 
+          axios.post('http://127.0.0.1:3000/api/members', 
           
             formData
           )

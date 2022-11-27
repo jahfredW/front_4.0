@@ -113,6 +113,11 @@
           to:'/'
         },
         {
+          title: 'Login >',
+          icon : 'mdi-login',
+          to:'/login'
+        },
+        {
           title: 'En développement >',
           icon: 'mdi-ghost-outline',
           to:'/projets/perso',

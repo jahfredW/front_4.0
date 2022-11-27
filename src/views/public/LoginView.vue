@@ -8,7 +8,7 @@
   import { defineComponent } from 'vue';
   
   // Components
-  import LoginForm from '../components/loginForm.vue';
+  import LoginForm from '../../components/loginForm.vue';
   
   export default defineComponent({
     name: 'loginView',

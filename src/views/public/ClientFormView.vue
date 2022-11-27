@@ -8,7 +8,7 @@
   import { defineComponent } from 'vue';
   
   // Components
-  import ClientForm from '../components/ClientForm.vue';
+  import ClientForm from '../../components/ClientForm.vue';
   
   export default defineComponent({
     name: 'ClientFormView',

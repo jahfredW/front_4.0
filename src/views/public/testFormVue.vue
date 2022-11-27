@@ -8,7 +8,7 @@
     import { defineComponent } from 'vue';
     
     // Components
-    import ClientTestForm from '../components/ClientTestForm.vue';
+    import ClientTestForm from '../../components/ClientTestForm.vue';
     
     export default defineComponent({
       name: 'clientTestForm',

@@ -5,7 +5,6 @@
     v-for="item in this.testprop"
    >
       <ProjetCard
-      
         :projectTitle = item>
       </ProjetCard>
     </v-col>
@@ -17,7 +16,7 @@
   import { defineComponent } from 'vue';
   
   // Components
-  import ProjetCard from '../components/ProjetCard.vue';
+  import ProjetCard from '../../components/ProjetCard.vue';
   import axios from 'axios';
   
   export default defineComponent({

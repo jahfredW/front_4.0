@@ -17,8 +17,8 @@
 <script>
     import { defineComponent } from 'vue';
     // Components
-    import Techno from '../components/technos.vue';
-    import Loading from '../components/Loading.vue'
+    import Techno from '../../components/technos.vue';
+    import Loading from '../../components/Loading.vue'
     
     export default defineComponent({
       name: 'techno',

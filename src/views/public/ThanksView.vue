@@ -11,8 +11,8 @@
   import { defineComponent } from 'vue';
   
   // Components
-  import Thanks from '../components/Thanks.vue';
-  import Loading from '../components/Loading.vue'
+  import Thanks from '../../components/Thanks.vue';
+  import Loading from '../../components/Loading.vue'
   
   export default defineComponent({
     name: 'thanks',

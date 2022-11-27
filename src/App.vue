@@ -37,17 +37,13 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar id="app_bar" app image="header.jpg"  class="is-flex-direction-column">
+    <v-app-bar id="app_bar" app image="cover.jpg"  class="is-flex-direction-column">
       <v-app-bar-nav-icon color="white" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-subtitle class="has-text-white">Menu</v-app-bar-subtitle>
-
     </v-app-bar>
 
     <v-main id="main" style="background-color: #EBECF0">
-    
-  
       <router-view />
-  
     </v-main>
 
     <v-footer app id="footer" padless image="cover.jpg">
@@ -112,15 +108,11 @@
           icon : 'mdi-home',
           to:'/'
         },
-        {
-          title: 'Login >',
-          icon : 'mdi-login',
-          to:'/login'
-        },
+        
         {
           title: 'En développement >',
           icon: 'mdi-ghost-outline',
-          to:'/projets/perso',
+          to:'/projets',
         },
 
 
@@ -134,6 +126,11 @@
           title: 'Contactez-moi ! >',
           icon: 'mdi-phone',
           to: '/contact',
+        },
+        {
+          title: 'Admin >',
+          icon : 'mdi-account',
+          to:'/login'
         },
 
       ],

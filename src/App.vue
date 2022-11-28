@@ -102,7 +102,7 @@
 <script>
 
   export default {
-    name: "App",
+    name: "caca",
 
     data: () => ({ 
       drawer: null,

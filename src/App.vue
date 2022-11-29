@@ -24,7 +24,7 @@
                 </v-icon>
               </v-list-item-icon>
             </v-col>
-            <v-col class="has-text-left mt-2 mr-5">
+            <v-col class=" mt-2 text-right ">
               <v-list-item-content>
                 <v-list-item-title>
                   {{ item.title }}
@@ -128,7 +128,7 @@
           to: '/contact',
         },
         {
-          title: 'Admin >',
+          title: 'Mode Admin >',
           icon : 'mdi-account',
           to:'/login'
         },

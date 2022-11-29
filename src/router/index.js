@@ -1,15 +1,13 @@
 
 
-import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createMemoryHistory } from 'vue-router'
 import PublicLayout from '@/views/public/Layout.vue'
-import AdminLayout from '../views/admin/Layout.vue'
-import Dashboard from '../views/admin/Dashboard.vue'
+import AdminLayout from '@/views/admin/Layout.vue'
+import Dashboard from '@/views/admin/Dashboard.vue'
 
 
 const router = createRouter({
-  history: createWebHistory(),
-  
-
+  history: createWebHashHistory(),
   routes: [
 
     {
@@ -28,17 +26,28 @@ const router = createRouter({
         { path: '/projets', name: 'perso', component: () => import('../views/public/ProjetCardView.vue') },
         { path: '/contact', name: 'caca', component: () => import('../views/public/testFormVue.vue') },
         { path: '/thanks', name: 'thanks', component: () => import('../views/public/ThanksView.vue') },
+        
       ]
     },
-
 
     {
       path: '/admin',
       name: 'admin',
       component : AdminLayout,
       children : [
-        { path : 'dashboard', name :"dashboard", component : Dashboard},
+        { path : 'dashboard', name :"dashboard", component : () => import('@/views/admin/Dashboard.vue') },
+        { path : 'dashboard/index', name : "index", component : () => import ('@/views/admin/users/UserIndex.vue') },
+        { path : 'dashboard/edit/:id(\\d+)', name : "edit", props : true, component : () => import ('@/views/admin/users/UserEdit.vue') },
+        { path : 'dashboard/add', name : "add", component : () => import ('@/views/admin/users/UserAdd.vue') },
+        {
+          path: '/:pathMatch(.*)*', redirect: '/admin/dashboard' // ou component : NotFound
+        }
+
       ]
+    },
+
+    {
+        path: '/login', name: 'Login', component : () => import ('@/views/auth/Login.vue')
     },
 
     {

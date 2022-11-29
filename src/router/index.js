@@ -4,6 +4,7 @@ import { createRouter, createWebHashHistory, createMemoryHistory } from 'vue-rou
 import PublicLayout from '@/views/public/Layout.vue'
 import AdminLayout from '@/views/admin/Layout.vue'
 import Dashboard from '@/views/admin/Dashboard.vue'
+import { decode } from './functions.js'
 
 
 const router = createRouter({
@@ -35,7 +36,8 @@ const router = createRouter({
       name: 'admin',
       component : AdminLayout,
       children : [
-        { path : 'dashboard', name :"dashboard", component : () => import('@/views/admin/Dashboard.vue') },
+        { path : 'dashboard', name :"dashboard", component : () => import('@/views/admin/Dashboard.vue'), beforeEnter : decode
+        },
         { path : 'dashboard/index', name : "index", component : () => import ('@/views/admin/users/UserIndex.vue') },
         { path : 'dashboard/edit/:id(\\d+)', name : "edit", props : true, component : () => import ('@/views/admin/users/UserEdit.vue') },
         { path : 'dashboard/add', name : "add", component : () => import ('@/views/admin/users/UserAdd.vue') },

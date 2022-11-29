@@ -1,77 +1,85 @@
 <template>
       <v-form 
-  id="form"
-  v-model="valid"
-   ref="form" 
-   lazy-validation>
-    <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            :counter="10"
-            label="Email"
-            required
-          ></v-text-field>
-        </v-col>
+      @submit.prevent="validate"
+            id="form"
+            v-model="valid"
+            ref="form" 
+            lazy-validation>
+        <v-container class="text-center">
+            <v-banner class="mb-5">
+                Formulaire de connexion mode administrateur
+            </v-banner >
+            <v-row >
+                <v-col
+                    cols="12"
+                >
+                    <v-text-field
+                    v-model="email"
+                    :rules="emailRules"
+                    :counter="10"
+                    label="Email"
+                    required
+                    >
+                    </v-text-field>
+                </v-col>
 
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="password"
-            :rules="passwordRules"
-            :counter="10"
-            label="Password"
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-btn
-      :disabled="!valid"
-      color="success"
-      class="mr-4"
-      @click="validate"
-      >
-          Validate
-      </v-btn>
-      <v-btn v-if="!this.checkLocal() "
-      color="success"
-      class="mr-4"
-      @click="disconnect"
-      >
-          Se déconnecter
-      </v-btn>
+                <v-col
+                cols="12"
+              
+                >
+                    <v-text-field
+                    v-model="password"
+                    :rules="passwordRules"
+                    :counter="10"
+                    label="Password"
+                    required
+                    >
+                </v-text-field>
+                </v-col>
+                </v-row>
+                    <v-col clos="12">
+                        <v-btn
+                        :disabled="!valid"
+                        color="success"
+                        class="mr-4"
+                        @keyup.enter="validate"
+                        @click.prevent="validate"
+                        >Validate
+                        </v-btn>
+                    </v-col>
+                    
+                    <v-col cols="12">
+                        <v-btn v-if="!this.checkLocal() "
+                        color="red"
+                        class="mr-4"
+                        @click="disconnect"
+                        >Se déconnecter
+                    </v-btn>
+                    </v-col>
+                    
+                    <v-col clos="12">
+                        <v-btn v-if="!this.checkLocal() "
+                        color="primary"
+                        class="mr-4"
+                        @click="findClient"
+                        >BDD
+                        </v-btn>
+                    </v-col>
+                    
 
-      <v-btn v-if="!this.checkLocal() "
-      color="success"
-      class="mr-4"
-      @click="findClient"
-      >
-          BDD
-      </v-btn>
-
-      <div v-if="!this.checkLocal() "
-      :disabled="!valid"
-      color="success"
-      class="mr-4"
-      >
-          Connecté
-  </div>
-
-  
-    </v-container>
-  </v-form>
-  </template>
+                    <div v-if="!this.checkLocal() "
+                    :disabled="!valid"
+                    color="success"
+                    class="mr-4"
+                    >Connecté
+                    </div>
+        </v-container>
+    </v-form>
+</template>
 
 <script>
 
-import LoginForm from '@/components/loginForm.vue'
+
 import axios from "axios";
  
 axios.defaults.headers.common["Authorization"] =
@@ -79,10 +87,8 @@ axios.defaults.headers.common["Authorization"] =
 
 export default {
     name : 'loginVue',
-    components : {
-    LoginForm
-  },
-  data: () => ({
+
+    data: () => ({
     valid: true,
     password: '',
     email: '',
@@ -118,9 +124,8 @@ export default {
             console.log(response);
             console.log('ici');
             let token = response.data.token;
-
             localStorage.setItem('user', token);
-            location.reload();
+            this.$router.push('/admin/dashbord');
             
      
           })

@@ -12,8 +12,8 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list dense nav>
-        <v-list-item v-for="item in items" :key="item.title" :to="item.to" link>
+      <v-list v-if="this.checkLocal()" dense nav>
+        <v-list-item v-for="item in items_public" :key="item.title" :to="item.to" link>
           <v-row class="is-flex-direction-row 
             is-justify-content-space-around
             ">
@@ -34,8 +34,117 @@
           </v-row>
         </v-list-item>
         <v-divider></v-divider>
+        <div link class="subheading mx-3"
+            target="_blank">
+            <v-row class="is-flex-direction-row 
+            is-justify-content-space-between
+            ">
+            <div class="pl-4 pt-1">
+              <v-list-item-icon>
+                <v-icon large color="blue darken-2">
+                  mdi-login
+              </v-icon>
+              </v-list-item-icon>
+            </div>
+            <div class="pr-3">
+              <v-btn to="/login" link>
+                Connection
+              </v-btn>
+            </div>
+            </v-row>
+        </div>
+        <v-divider></v-divider>
       </v-list>
-    </v-navigation-drawer>
+
+      <v-list v-else-if="this.checkAdmin() === 'user'" dense nav>
+        <v-list-item v-for="item in items_private" :key="item.title" :to="item.to" link>
+          <v-row class="is-flex-direction-row 
+            is-justify-content-space-around
+            ">
+            <v-col class="has-text-left ml-2">
+              <v-list-item-icon>
+                <v-icon large color="blue darken-2">
+                  {{ item.icon }}
+                </v-icon>
+              </v-list-item-icon>
+            </v-col>
+            <v-col class=" mt-2 text-right ">
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ item.title }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-col>
+          </v-row>
+        </v-list-item>
+        <v-divider></v-divider>
+        <div link class="subheading mx-3"
+            target="_blank">
+            <v-row class="is-flex-direction-row 
+            is-justify-content-space-between
+            ">
+            <div class="pl-4">
+              <v-list-item-icon>
+                <v-icon large color="blue darken-2">
+                  mdi-logout
+              </v-icon>
+              </v-list-item-icon>
+            </div>
+            <div class="pr-3">
+              <a @click="this.deleteToken()" href="/">
+                Déconnection
+              </a>
+            </div>
+            </v-row>
+        </div>
+        <v-divider></v-divider>
+      </v-list>
+      
+
+      <v-list v-else dense nav>
+        <v-list-item v-for="item in items_admin" :key="item.title" :to="item.to" link>
+          <v-row class="is-flex-direction-row 
+            is-justify-content-space-around
+            ">
+            <v-col class="has-text-left ml-2">
+              <v-list-item-icon>
+                <v-icon large color="blue darken-2">
+                  {{ item.icon }}
+                </v-icon>
+              </v-list-item-icon>
+            </v-col>
+            <v-col class=" mt-2 text-right ">
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ item.title }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-col>
+          </v-row>
+        </v-list-item>
+        <v-divider></v-divider>
+        <div link class="subheading mx-3"
+            target="_blank">
+            <v-row class="is-flex-direction-row 
+            is-justify-content-space-between
+            ">
+            <div class="pl-4">
+              <v-list-item-icon>
+                <v-icon large color="blue darken-2">
+                  mdi-logout
+              </v-icon>
+              </v-list-item-icon>
+            </div>
+            <div class="pr-3">
+              <a @click="this.deleteToken()" href="/">
+                Déconnection
+              </a>
+            </div>
+            </v-row>
+        </div>
+        <v-divider></v-divider>
+      </v-list>
+    </v-navigation-drawer> 
 
     <v-app-bar id="app_bar" app image="cover.jpg"  class="is-flex-direction-column">
       <v-app-bar-nav-icon color="white" @click="drawer = !drawer"></v-app-bar-nav-icon>
@@ -60,9 +169,8 @@
                 {{ link.text }}
               </a>
             </div>
-
-
           </div>
+          
         </v-row>
      
     </v-footer>
@@ -73,23 +181,19 @@
 
 
 <script>
+import VueJwtDecode from 'jwt-decode';
 
-  export default {
-    name: "caca",
+export default {
+  name: "caca",
 
-    data: () => ({ 
-      drawer: null,
-      importantLinks: [
+  data: () => ({
+    drawer: null,
+    importantLinks: [
       {
         icon: 'mdi-facebook',
         text: 'Facebook',
         href: 'https://www.facebook.com/profile.php?id=100088179605430',
       },
-      // {
-      //   icon: 'mdi-twitter',
-      //   text: 'Twitter',
-      //   href: 'https://twitter.com/vuetifyjs',
-      // },
       {
         icon: 'mdi-linkedin',
         text: 'Linked-in',
@@ -101,55 +205,89 @@
         href: 'https://github.com/jahfredW',
       },
     ],
-      
-      items: [
-        {
-          title: 'Accueil >',
-          icon : 'mdi-home',
-          to:'/'
-        },
-        
-        {
-          title: 'En développement >',
-          icon: 'mdi-ghost-outline',
-          to:'/projets',
-        },
 
+    items_public: [
+      {
+        title: 'Accueil >',
+        icon: 'mdi-home',
+        to: '/'
+      },
+      {
+        title: 'Inscription >',
+        icon: 'mdi-account-edit',
+        to: '/signup'
+      },
 
-        {
-          title: 'Mon stack >',
-          icon: 'mdi-alien-outline',
-          to: '/stack',
-        },
+      {
+        title: 'Contactez-moi ! >',
+        icon: 'mdi-phone',
+        to: '/contact',
+      },
+    ],
 
-        {
-          title: 'Contactez-moi ! >',
-          icon: 'mdi-phone',
-          to: '/contact',
-        },
-        {
-          title: 'Mode Admin >',
-          icon : 'mdi-account',
-          to:'/login'
-        },
+    items_private: [
+      {
+        title: 'En développement >',
+        icon: 'mdi-ghost-outline',
+        to: '/projets',
+      },
 
-      ],
+      {
+        title: 'Mon stack >',
+        icon: 'mdi-alien-outline',
+        to: '/stack',
+      },
+    ],
 
+    items_admin: [
+      {
+        title: 'Afficher Membres >',
+        icon: 'mdi-ghost-outline',
+        to: '/admin/Dashboard/index',
+      },
 
-      
-    }),
+      {
+        title: 'Rechercher Membres >',
+        icon: 'mdi-alien-outline',
+        to: '/stack',
+      },
+    ]
+  }),
 
-    methods: {
+  methods: {
 
-      titleSetter() {
-        window.addEventListener('resize', function() {
-          if (window.innerWidth >= 800){
-          this.document.querySelector("#title").innerHTML = 'Frédéric Gruwe';
-        } else {
-          this.document.querySelector("#title").innerHTML = 'Fred G';
-        }
-        });
-      }}}
+    checkLocal() {
+      return localStorage.user === undefined;
+
+    },
+
+    checkAdmin() {
+      if(!this.checkLocal()){
+        let token = localStorage.getItem('user');
+        let decoded = VueJwtDecode(token);
+        return this.checkId(decoded.userId);
+      } 
+    },
+
+    checkId(token) {
+      if (token === 1) {
+        return "admin";
+      }
+      return "user";
+    },
+
+    deleteToken() {
+      try {
+        localStorage.removeItem('user');
+      }
+
+      catch {
+        console.log('error');
+      }
+
+    },
+  }
+}
 
 </script>
 

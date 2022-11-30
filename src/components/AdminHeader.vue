@@ -1,10 +1,5 @@
 <template>
     <v-banner class="text-center font-weight-bold text-h4">Bienvenue sur le mode administrateur</v-banner>
-    <div class="admin-head text-center">
-        <v-btn>Afficher utilisateurs</v-btn>
-        <v-btn>Rechercher utilisateurs</v-btn>
-        <v-btn>Supprimer utilisateurs</v-btn>
-    </div>
 </template>
 
 <script>

@@ -7,7 +7,7 @@
             lazy-validation>
         <v-container class="text-center">
             <v-banner class="mb-5">
-                Formulaire de connexion mode administrateur
+              Entrez votre email et votre mot de passe :
             </v-banner >
             <v-row >
                 <v-col
@@ -48,23 +48,23 @@
                         </v-btn>
                     </v-col>
                     
-                    <v-col cols="12">
+                    <!-- <v-col cols="12">
                         <v-btn v-if="!this.checkLocal() "
                         color="red"
                         class="mr-4"
                         @click="disconnect"
                         >Se déconnecter
                     </v-btn>
-                    </v-col>
+                    </v-col> -->
                     
-                    <v-col clos="12">
+                    <!-- <v-col clos="12">
                         <v-btn v-if="!this.checkLocal() "
                         color="primary"
                         class="mr-4"
                         @click="findClient"
                         >BDD
                         </v-btn>
-                    </v-col>
+                    </v-col> -->
                     
 
                     <div v-if="!this.checkLocal() "

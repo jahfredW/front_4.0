@@ -1,9 +1,7 @@
 <template>
     <div>
         <AdminHeader/>
-        Admin Layout
         <router-view/>
-        
     </div>
 </template>
 

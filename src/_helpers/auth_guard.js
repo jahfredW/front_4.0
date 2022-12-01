@@ -1,9 +1,11 @@
 import VueJwtDecode from 'jwt-decode';
 import router from '@/router';
+// module qui permet de vérifier les infos du token, 
+// afin de sécuriser les routes. 
 
-
+// vérifie si le token est toujours valide ( date )
 export function decode(to){
-            let token = localStorage.getItem('user');
+            let token = localStorage.getItem('token');
             console.log(token);
             try{
                 let decoded = VueJwtDecode(token)
@@ -14,8 +16,20 @@ export function decode(to){
             }
           }
 
+function checkDate(token){
+if (Date.now() >= token * 1000) {
+    localStorage.removeItem('token');
+    alert('Vous devez vous reconnecter')
+    router.push('/login');
+    } else {
+    return true;
+    }
+} 
+
+
+// vérifie si le token appartient à l'administrateur.
 export function decodeAdmin(to){
-    let token = localStorage.getItem('user');
+    let token = localStorage.getItem('token');
     console.log(token);
     try{
         let decoded = VueJwtDecode(token)
@@ -25,16 +39,7 @@ export function decodeAdmin(to){
     }
 }
 
-function checkDate(token){
-            if (Date.now() >= token * 1000) {
-                localStorage.removeItem('user');
-                alert('Vous devez vous reconnecter')
-                router.push('/');
-              } else {
-                return true;
-              }
-        }  
-
+ 
 function checkId(token){
     if (token === 1) {
         return true;
@@ -43,7 +48,7 @@ function checkId(token){
 }  
 
 export function simpleDecode(){
-    let token = localStorage.getItem('user');
+    let token = localStorage.getItem('token');
         console.log(token);
         try{
             let decoded = VueJwtDecode(token)

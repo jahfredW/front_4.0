@@ -47,32 +47,6 @@
                       >Validate
                       </v-btn>
                   </v-col>
-                  
-                  <!-- <v-col cols="12">
-                      <v-btn v-if="!this.checkLocal() "
-                      color="red"
-                      class="mr-4"
-                      @click="disconnect"
-                      >Se déconnecter
-                  </v-btn>
-                  </v-col> -->
-                  
-                  <!-- <v-col clos="12">
-                      <v-btn v-if="!this.checkLocal() "
-                      color="primary"
-                      class="mr-4"
-                      @click="findClient"
-                      >BDD
-                      </v-btn>
-                  </v-col> -->
-                  
-
-                  <div v-if="!this.checkLocal() "
-                  :disabled="!valid"
-                  color="success"
-                  class="mr-4"
-                  >Connecté
-                  </div>
       </v-container>
   </v-form>
 </template>
@@ -125,7 +99,7 @@ methods: {
           console.log('ici');
           let token = response.data.token;
           localStorage.setItem('user', token);
-          this.$router.push('/');
+          this.$router.push('/thanks');
           
         })
         .catch(error => {

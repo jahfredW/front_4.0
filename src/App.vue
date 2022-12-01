@@ -184,7 +184,7 @@
 import VueJwtDecode from 'jwt-decode';
 
 export default {
-  name: "caca",
+  name: "mainApp",
 
   data: () => ({
     drawer: null,
@@ -217,6 +217,11 @@ export default {
         icon: 'mdi-account-edit',
         to: '/signup'
       },
+      {
+        title: 'Mon stack >',
+        icon: 'mdi-alien-outline',
+        to: '/stack',
+      },
 
       {
         title: 'Contactez-moi ! >',
@@ -229,14 +234,10 @@ export default {
       {
         title: 'En développement >',
         icon: 'mdi-ghost-outline',
-        to: '/projets',
+        to: '/user/projets',
       },
 
-      {
-        title: 'Mon stack >',
-        icon: 'mdi-alien-outline',
-        to: '/stack',
-      },
+      
     ],
 
     items_admin: [
@@ -257,13 +258,13 @@ export default {
   methods: {
 
     checkLocal() {
-      return localStorage.user === undefined;
+      return localStorage.token === undefined;
 
     },
 
     checkAdmin() {
       if(!this.checkLocal()){
-        let token = localStorage.getItem('user');
+        let token = localStorage.getItem('token');
         let decoded = VueJwtDecode(token);
         return this.checkId(decoded.userId);
       } 
@@ -278,7 +279,7 @@ export default {
 
     deleteToken() {
       try {
-        localStorage.removeItem('user');
+        localStorage.removeItem('token');
       }
 
       catch {

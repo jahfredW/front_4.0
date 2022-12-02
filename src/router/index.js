@@ -57,7 +57,10 @@ const router = createRouter({
       children : [
         { path : 'dashboard', name :"dashboard", component : () => import('@/views/admin/Dashboard.vue'),
         },
-        { path : 'dashboard/index', name : "index", component : () => import ('@/views/admin/users/UserIndex.vue') },
+        {
+          path : 'dashboard/userUpdated', name : 'UserUpdated', component :() => import('@/views/admin/userCreatedView.vue'),
+        },
+        { path : 'dashboard/index', name : "UserIndex", component : () => import ('@/views/admin/users/UserIndex.vue') },
         { path : 'dashboard/edit/:id(\\d+)', name : "uEdit", props : true, component : () => import ('@/views/admin/users/UserEdit.vue') },
         { path : 'dashboard/add', name : "add", component : () => import ('@/views/admin/users/UserAdd.vue') },
         {

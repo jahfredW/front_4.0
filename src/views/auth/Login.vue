@@ -1,11 +1,11 @@
 <template>
-      <v-form 
+  <v-container class="w-75 mt-15">
+    <v-form 
       @submit.prevent="validate"
             id="form"
             v-model="valid"
             ref="form" 
             lazy-validation>
-        <v-container class="text-center">
             <v-banner class="mb-5">
               Entrez votre email et votre mot de passe :
             </v-banner >
@@ -47,34 +47,9 @@
                         >Validate
                         </v-btn>
                     </v-col>
-                    
-                    <!-- <v-col cols="12">
-                        <v-btn v-if="!this.checkLocal() "
-                        color="red"
-                        class="mr-4"
-                        @click="disconnect"
-                        >Se déconnecter
-                    </v-btn>
-                    </v-col> -->
-                    
-                    <!-- <v-col clos="12">
-                        <v-btn v-if="!this.checkLocal() "
-                        color="primary"
-                        class="mr-4"
-                        @click="findClient"
-                        >BDD
-                        </v-btn>
-                    </v-col> -->
-                    
-
-                    <div v-if="!this.checkLocal() "
-                    :disabled="!valid"
-                    color="success"
-                    class="mr-4"
-                    >Connecté
-                    </div>
-        </v-container>
     </v-form>
+  </v-container>
+      
 </template>
 
 <script>
@@ -83,6 +58,7 @@
 // ira directement dans idnex.js 
 
 import { accountService } from '@/_services'
+import  { isAdmin } from '@/_helpers/auth_guard.js'
 
 
 
@@ -124,7 +100,12 @@ export default {
             console.log(response);
             let token = response.data.access_token;
             accountService.saveToken(token);
-            this.$router.push('/admin/dashbord');
+            if(isAdmin()){
+              this.$router.push('/admin/dashbord');
+            } else {
+              this.$router.push('/user/projets')
+            }
+            
           })
           .catch(error => {
             alert("Vous devez vous inscrire d'abord !");

@@ -18,6 +18,7 @@ library.add(fas)
 
 const pinia = createPinia();
 
+
 loadFonts()
 
 createApp(App)

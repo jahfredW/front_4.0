@@ -33,7 +33,8 @@ export function decodeAdmin(to){
     console.log(token);
     try{
         let decoded = VueJwtDecode(token)
-        return checkId(decoded.userId);
+        console.log(decoded.isAdmin)
+        return checkId(decoded.isAdmin);
     } catch {
         router.push('/');
     }
@@ -41,8 +42,8 @@ export function decodeAdmin(to){
 
  
 function checkId(token){
-    if (token === 1) {
-        return true;
+    if (token == true) {
+        return token;
         } 
     router.push('/');
 }  
@@ -57,4 +58,17 @@ export function simpleDecode(){
         } catch {
            console.log("Token non défini")
         }
+}
+
+
+export function isAdmin(){
+    let token = localStorage.getItem('token');
+    console.log(token);
+    try{
+        let decoded = VueJwtDecode(token)
+        console.log(decoded.isAdmin)
+        return decoded.isAdmin;
+    } catch {
+        router.push('/');
+    }
 }

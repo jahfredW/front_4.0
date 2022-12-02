@@ -1,24 +1,30 @@
 <template>
-   <div class="text-center">
+   <v-container class="text-center container">
     <div class="font-weight-bold text-h5 my-3">Liste des utilisateurs : {{ userNumber}}</div>
-    <table class="table mx-auto w-75">
+    <table class="table w-100">
         <thead>
             <tr>
-                <th class="text-center">id</th>
-                <th class="text-center">email</th>
-                <th class="text-center">création</th>
+                <th  class="text-center">id</th>
+                <th  class="hidden-xs hidden-sm text-center">nom</th>
+                <th  class="hidden-xs hidden-sm text-center">prenom</th>
+                <th  class="text-center">pseudo</th>
+                <th  class="text-center">email</th>
+                <th  class="hidden-xs hidden-sm text-center">création</th>
             </tr>
             
         </thead>
         <tbody>
             <tr v-for="(user, index) in userArray" :key="user.id">
                 <td> {{ user.id }}</td>
-                <td class="edit" @click="goEdit(user.id)"> {{ user.email}}</td>
-                <td> {{ formatDate[index]}}</td>
+                <td class="hidden-xs hidden-sm"> {{ user.name }}</td>
+                <td class="hidden-xs hidden-sm" > {{ user.surname }}</td>
+                <td > {{ user.pseudo }}</td>
+                <td class="edit" title="modifier" @click="goEdit(user.id)"> {{ user.email }}</td>
+                <td class="hidden-xs hidden-sm"> {{ formatDate[index]}}</td>
             </tr>
         </tbody>
     </table>
-   </div>
+</v-container>
   </template>
 
 <script>
@@ -63,11 +69,20 @@ export default {
                 console.log('ici');
                 console.log(err)
             })
+        },
+        // retourne taille de l'écran, 
+        // inutile face à hidden-xs, sm, md, lg, xl
+        windowSize(){
+            return window.innerWidth > 500;
         }
         
     },
 
     mounted(){
+     
+        console.log(window.innerWidth > 500);
+        
+        
         console.log(this.$route.params.id);
         this.submit();
     },

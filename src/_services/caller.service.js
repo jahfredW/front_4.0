@@ -5,12 +5,14 @@ import router from '@/router'
 /* ce module défini la configuration initiale de axios, 
 et paramètre le header */
 
-// axios.defaults.headers.common["Authorization"] =
-//   "Bearer, " + localStorage.getItem("token");
+
 
 const Axios = axios.create({
     baseURL: 'http://localhost:3000'
 })
+
+// Axios.defaults.headers.common["Authorization"] =
+//   "Bearer, " + localStorage.getItem("token");
 
 // Interceptor des réponses de l'api
 
@@ -21,7 +23,7 @@ Axios.interceptors.response.use(response => {
     if(error.response.status == 401){
         accountService.logout();
         router.push('/login');
-        alert('Désolé, vous devez vous reconnecter ! ')
+        alert('Désolé, vous n etes pas autorisé ! ')
         
     }
 })

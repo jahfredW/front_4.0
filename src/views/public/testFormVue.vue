@@ -1,5 +1,5 @@
 <template>
-    <v-container class="container">
+    <v-container class="container w-75 mt-15">
       <ClientTestForm></ClientTestForm>
     </v-container>
   </template>
@@ -25,15 +25,5 @@
     });
     </script>
   
-  <style>
   
-  .container{
-    box-sizing: border-box;
-    width: 70vw;
-    margin: 6vw auto;
-    color: white;
-    opacity: 1;
-  }
-  
-  </style>
     

@@ -12,7 +12,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list v-if="this.checkLocal()" dense nav>
+      <v-list v-if="(this.checkLocal() && this.checkAdmin() === undefined)" dense nav>
         <v-list-item v-for="item in items_public" :key="item.title" :to="item.to" link>
           <v-row class="is-flex-direction-row 
             is-justify-content-space-around
@@ -56,7 +56,7 @@
         <v-divider></v-divider>
       </v-list>
 
-      <v-list v-else-if="this.checkAdmin() === 'user'"  dense nav>
+      <v-list v-else-if="(!this.checkLocal() && this.checkAdmin() === 'user')"  dense nav>
         <v-list-item v-for="item in items_private" :key="item.title" :to="item.to" link>
           <v-row class="is-flex-direction-row 
             is-justify-content-space-around
@@ -257,31 +257,40 @@ export default {
 
   updated(){
     this.drawer = null;
+    console.log("check : " + !this.checkLocal());
+  },
+
+  mounted(){
+    console.log("check : " + !this.checkLocal())
+    console.log("admin : " + this.checkAdmin())
   },
 
   methods: {
-
+    // vérifie si le token existe
     checkLocal() {
       return localStorage.token === undefined;
 
     },
 
     checkAdmin() {
+      // vérifie si c'est l'admin qui est connecté
       if(!this.checkLocal()){
         let token = localStorage.getItem('token');
         let decoded = VueJwtDecode(token);
-        return this.checkId(decoded.userId);
+        return this.checkId(decoded.isAdmin);
       } 
     },
 
     checkId(token) {
-      if (token === 1) {
+      // défini l'utilisateur connecté ( admin ou user lambda)
+      if (token === true) {
         return "admin";
       }
       return "user";
     },
 
     deleteToken() {
+      // efface le token du localStorage
       try {
         localStorage.removeItem('token');
       }

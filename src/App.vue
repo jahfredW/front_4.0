@@ -56,7 +56,7 @@
         <v-divider></v-divider>
       </v-list>
 
-      <v-list v-else-if="this.checkAdmin() === 'user'" dense nav>
+      <v-list v-else-if="this.checkAdmin() === 'user'"  dense nav>
         <v-list-item v-for="item in items_private" :key="item.title" :to="item.to" link>
           <v-row class="is-flex-direction-row 
             is-justify-content-space-around
@@ -101,7 +101,7 @@
       </v-list>
       
 
-      <v-list v-else dense nav>
+      <v-list v-else  dense nav>
         <v-list-item v-for="item in items_admin" :key="item.title" :to="item.to" link>
           <v-row class="is-flex-direction-row 
             is-justify-content-space-around
@@ -237,6 +237,11 @@ export default {
         icon: 'mdi-alien-outline',
         to: '/stack',
       },
+      {
+        title: 'Contactez-moi ! >',
+        icon: 'mdi-phone',
+        to: '/contact',
+      },
     ],
 
     items_admin: [
@@ -253,6 +258,10 @@ export default {
       },
     ]
   }),
+
+  updated(){
+    this.drawer = null;
+  },
 
   methods: {
 

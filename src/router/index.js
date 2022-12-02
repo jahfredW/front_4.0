@@ -15,7 +15,7 @@ import { decodeAdmin } from '../_helpers/auth_guard'
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
-    
+    // routes publiques 
     {
       path : '/',
       name: 'public',
@@ -36,7 +36,7 @@ const router = createRouter({
       ],
 
     },
-
+    // routes admin 
     {
       path: '/admin',
       name: 'admin',
@@ -61,6 +61,8 @@ const router = createRouter({
    ]
 })
 
+
+// verouillage de la partie admin 
 router.beforeEach( (to, from, next) => {
   console.log(to.matched[0].name)
   if(to.matched[0].name == 'admin'){

@@ -79,11 +79,12 @@
 
 <script>
 
+// le fait de mettre in index = pas besoin de préciser, il 
+// ira directement dans idnex.js 
 
-import axios from "axios";
- 
-axios.defaults.headers.common["Authorization"] =
-  "Bearer, " + localStorage.getItem("user");
+import { accountService } from '@/_services'
+
+
 
 export default {
     name : 'loginVue',
@@ -112,22 +113,18 @@ export default {
 
       submit() {
         if (this.$refs.form.validate()){
-            var formData = new FormData();
+            let formData = new FormData();
             console.log(this.checkLocal());          
             formData = {
             email : this.email,
             password : this.password, 
-          }
-          axios
-          .post('http://127.0.0.1:3000/api/auth/login', formData)
+            }
+          accountService.login(formData)
           .then( response => {
             console.log(response);
-            console.log('ici');
-            let token = response.data.token;
-            localStorage.setItem('user', token);
+            let token = response.data.access_token;
+            accountService.saveToken(token);
             this.$router.push('/admin/dashbord');
-            
-     
           })
           .catch(error => {
             alert("Vous devez vous inscrire d'abord !");

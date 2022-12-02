@@ -23,8 +23,7 @@ export default {
     redirection() {
       setTimeout( () => {
         router.push('/')
-      }, 5000)
-
+      }, 3000)
     }
     },
 

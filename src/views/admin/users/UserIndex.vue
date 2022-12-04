@@ -9,6 +9,7 @@
                 <th  class="hidden-xs hidden-sm text-center">prenom</th>
                 <th  class="text-center">pseudo</th>
                 <th  class="text-center">email</th>
+                <th  class="text-center">admin</th>
                 <th  class="hidden-xs hidden-sm text-center">création</th>
             </tr>
             
@@ -20,6 +21,7 @@
                 <td class="hidden-xs hidden-sm" > {{ user.surname }}</td>
                 <td > {{ user.pseudo }}</td>
                 <td class="edit" title="modifier" @click="goEdit(user.id)"> {{ user.email }}</td>
+                <td class="hidden-xs hidden-sm"> {{user.isAdmin}}</td>
                 <td class="hidden-xs hidden-sm"> {{ formatDate[index]}}</td>
             </tr>
         </tbody>

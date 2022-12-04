@@ -261,6 +261,7 @@ export default {
   },
 
   mounted(){
+    this.drawer = null;
     console.log("check : " + !this.checkLocal())
     console.log("admin : " + this.checkAdmin())
   },

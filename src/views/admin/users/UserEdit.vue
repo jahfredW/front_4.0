@@ -8,22 +8,6 @@
                 <v-row>
                     <v-col cols="12">
                         <v-text-field
-                        v-model="user.name"
-                        :rules="basicRules"
-                        label="Nom"
-                        required > 
-                    </v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-text-field
-                        v-model="user.surname"
-                        :rules="basicRules"
-                        label="Prénom"
-                        required > 
-                    </v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-text-field
                         v-model="user.pseudo"
                         :rules="pseudoRules"
                         label="Pseudo"
@@ -37,6 +21,13 @@
                         label="email"
                         required > 
                     </v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                        <v-checkbox
+                        v-model="user.isAdmin"
+                        :label="getAdmin"
+                        required > 
+                    </v-checkbox>
                     </v-col>
                 </v-row>
                 <v-btn
@@ -64,11 +55,11 @@ export default {
         return {
             valid: false,
             user : {
-                name : "",
-                surname : "",
+                isAdmin : false,
                 pseudo : "",
                 email : "",
             },
+            admin : "",
             // définition des règles de validation
 
             pseudoRule : [
@@ -101,6 +92,18 @@ export default {
         }
     },
 
+    computed : {
+        getAdmin(){
+            if (this.user.isAdmin){
+            this.admin = "Je suis un administrateur"
+        } else {
+            this.admin ="Je ne suis pas un administrateur"
+        }
+        return this.admin
+        }
+        
+    },
+
     mounted(){
         // récupère les datas de l'utilisateur via son ID ( requete get en api )
         userService.getUser(this.id)
@@ -109,11 +112,7 @@ export default {
             this.user.id = this.id
         })
         .catch(err => console.log(err))
-    },
-
-
-
-
+    }
 }
 
 </script>

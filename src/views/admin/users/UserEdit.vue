@@ -106,12 +106,14 @@ export default {
 
     mounted(){
         // récupère les datas de l'utilisateur via son ID ( requete get en api )
-        userService.getUser(this.id)
+        userService.getUserAdmin(this.id)
         .then( res => {
+            console.log(res.data)
             this.user = res.data.data
             this.user.id = this.id
         })
         .catch(err => console.log(err))
+        
     }
 }
 

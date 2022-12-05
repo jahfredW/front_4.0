@@ -1,6 +1,6 @@
 <template>
    <v-container class="text-center container">
-    <div class="font-weight-bold text-h5 my-3">Liste des utilisateurs : {{ userNumber}}</div>
+    <div class="font-weight-bold text-h5 my-3">Liste des utilisateurs :</div>
     <table class="table w-100">
         <thead>
             <tr>

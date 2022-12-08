@@ -43,7 +43,7 @@ export function decodeAdmin(to){
  
 function checkId(token){
     if (token == true) {
-        return token;
+        return true;
         } 
     router.push('/');
 }  

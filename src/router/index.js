@@ -55,6 +55,9 @@ const router = createRouter({
       name: 'admin',
       component : AdminLayout,
       children : [
+        { 
+          path : 'usercreated', name : 'userCreated', component : () => import('@/views/admin/ThanksAdmin.vue'),
+        },
         { path : 'dashboard', name :"dashboard", component : () => import('@/views/admin/Dashboard.vue'),
         },
         {
@@ -62,6 +65,7 @@ const router = createRouter({
         },
         { path : 'dashboard/index', name : "UserIndex", component : () => import ('@/views/admin/users/UserIndex.vue') },
         { path : 'dashboard/edit/:id(\\d+)', name : "uEdit", props : true, component : () => import ('@/views/admin/users/UserEdit.vue') },
+        { path : 'dashboard/custom/:id(\\d+)', name : "uCustom", props : true, component : () => import ('@/views/admin/users/UserCustom.vue') },
         { path : 'dashboard/add', name : "add", component : () => import ('@/views/admin/users/UserAdd.vue') },
         {
           path: '/:pathMatch(.*)*', redirect: '/admin/dashboard' // ou component : NotFound

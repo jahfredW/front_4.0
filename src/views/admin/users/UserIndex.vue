@@ -1,5 +1,27 @@
 <template>
    <v-container class="text-center container">
+    <div class="font-weight-bold text-h5 my-3">Rechercher un utilisateur :</div>
+    <v-form ref="ref" v-model="valid">
+        <v-row>
+            <v-col cols="12">
+                <v-text-field
+                label="email"
+                :rules="emailRules"
+                v-model="email">
+            </v-text-field>
+            </v-col>
+        </v-row>
+        <v-btn
+            class="mb-5"
+            @click="this.search()"
+            :disabled="!valid"
+            type="submit"
+            color="success">
+            Chercher
+        </v-btn>
+    </v-form>
+    
+
     <div class="font-weight-bold text-h5 my-3">Liste des utilisateurs :</div>
     <table class="table w-100">
         <thead>
@@ -9,7 +31,7 @@
                 <th  class="hidden-xs hidden-sm text-center">prenom</th>
                 <th  class="text-center">pseudo</th>
                 <th  class="text-center">email</th>
-                <th  class="text-center">admin</th>
+                <th  class="hidden-xs hidden-sm text-center">admin</th>
                 <th  class="hidden-xs hidden-sm text-center">création</th>
             </tr>
             
@@ -31,6 +53,7 @@
 
 <script>
 import { userService } from '@/_services'
+import Axios from '../../../_services/caller.service';
 
 
 
@@ -39,12 +62,34 @@ export default {
 
     data() {
         return {
-            userArray : []
+            valid : false,
+            email : "",
+            userArray : [],
+            emailRules : [
+                v => !!v || "Le champs ne peut être vide",
+                v => !/[-!$%^&*()_+|~=`\\#{}\[\]:";'<>?,\/]/.test(v) || "les caractères spéciaux sont interdits",
+            ]
         }
            
     },
 
     methods : {
+
+        search(){
+            var formdata = new FormData();
+            formdata = {
+                email : this.email
+            }
+            
+        userService.getUserAdminEmail(formdata)
+        .then( data => {
+            if(data){
+                console.log(data)
+                this.$router.push({ name : 'uEdit', body:{ email: this.email}, params : { id : data.data.data.id}});
+            }
+        })
+        .catch()
+        },
 
         goEdit(id){
             if(id){

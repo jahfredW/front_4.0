@@ -23,8 +23,9 @@ Axios.interceptors.response.use(response => {
     if(error.response.status == 401){
         accountService.logout();
         router.push('/login');
-        alert('Désolé, vous n etes pas autorisé ! ')
-        
+        alert('Désolé, vous n etes pas autorisé ! ')}
+    else if(error.response.status == 500){
+        alert("Erreur lors de l'enregistrement ! ") 
     }
 })
 

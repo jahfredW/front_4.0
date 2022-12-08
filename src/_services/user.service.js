@@ -2,8 +2,16 @@
 import Axios from './caller.service.js'
 
 
-let getUserAdmin = (id) => {
+let getUserAdminId = (id) => {
     return Axios.get('api/admin/find/' + id)
+}
+
+let getUserAdminEmail = (formdata) => {
+    return Axios.post('api/admin/findbyemail' , formdata)
+}
+
+let getUserByEmail = (id) => {
+    return Axios.post('api/admin/findbyuser')
 }
 
 
@@ -13,6 +21,10 @@ let getUser = (id) => {
 
 let updateUser = (user) => {
     return Axios.put('api/auth/find/'+ user.id, user)
+}
+
+let deleteUser = (id) => {
+    return Axios.delete('api/admin/deleteuser/' + id)
 }
 
 
@@ -25,5 +37,8 @@ export const userService = {
     getAllUsers,
     getUser,
     updateUser,
-    getUserAdmin
+    getUserAdminId,
+    deleteUser,
+    getUserByEmail,
+    getUserAdminEmail
 }

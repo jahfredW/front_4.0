@@ -7,29 +7,18 @@
         icon="mdi-clock-fast"
         border="left"
       >
-        Utilisateur modifié avec succés !
+        Modification effectuée !
       </v-alert>
     </v-container>
 </template>
 
 <script>
 
-import router from "../router/index"
+
 
 
 export default {
-  
-  methods: {
-    redirection() {
-      setTimeout( () => {
-        router.push({ name : "UserIndex"})
-      }, 2000)
-    }
-    },
-
-   mounted() {
-    this.redirection();
-}
+  name : "ThanksUser"
 
 }
 

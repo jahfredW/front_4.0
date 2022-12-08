@@ -3,7 +3,7 @@
         <div class="text-center">
             <div class="font-weight-bold text-h5 my-3">Modifier l'utilisateur : </div>
         </div>
-        <v-form v-model="valid" @submit.prevent="edit">
+        <v-form v-model="valid" ref="form">
             <v-container>
                 <v-row>
                     <v-col cols="12">
@@ -31,10 +31,18 @@
                     </v-col>
                 </v-row>
                 <v-btn
+                @click="this.edit()"
                 :disabled="!valid"
                 type="submit"
                 color="success">
                 Modifier
+                </v-btn>
+                <v-btn
+                @click="this.delete()"
+                :disabled="!valid"
+                type="submit"
+                color="success">
+                Supprimer
                 </v-btn>
             </v-container>
         </v-form>
@@ -42,22 +50,22 @@
 </template>
 
 <script>
+import router from '@/router'
 import  { userService } from '@/_services'
 import { cloneVNode } from 'vue'
 
 
 export default {
-    name: 'UserEdit',
+    name: 'Uedit',
     // propriété de param accessible dans le scope, récupération de l'id
     // ici la props n'est pas dérivée du composant, mais récupérée via le routeur ( props : true )
-    props: ['id'],
+    props: ['id', 'email'],
     data() {
         return {
             valid: false,
             user : {
                 isAdmin : false,
                 pseudo : "",
-                email : "",
             },
             admin : "",
             // définition des règles de validation
@@ -87,8 +95,26 @@ export default {
         // Envoie les modificationsde l'utilisateur à l'api  
         edit(){
             userService.updateUser(this.user)
-            .then( res => this.$router.push({ name : 'UserUpdated'}))
-            .catch( err => console.log(err))
+            .then( res => {
+                console.log(res);
+                router.push({ name : 'UserUpdated'})
+            })
+            .catch( err => {
+                console.log('erreur !')
+                console.log(err)
+            })
+        },
+
+        delete(){
+            userService.deleteUser(this.id)
+            .then( res => {
+                console.log(res);
+                router.push({ name : 'UserUpdated'})
+            })
+            .catch( err => {
+                console.log('erreur !')
+                console.log(err)
+            })
         }
     },
 
@@ -105,14 +131,26 @@ export default {
     },
 
     mounted(){
+        
         // récupère les datas de l'utilisateur via son ID ( requete get en api )
-        userService.getUserAdmin(this.id)
+        if(this.id){
+            userService.getUserAdminId(this.id)
         .then( res => {
             console.log(res.data)
             this.user = res.data.data
             this.user.id = this.id
         })
         .catch(err => console.log(err))
+        }
+        if(this.email){
+            userService.getUserAdminEmail(this.email)
+            .then( res => {
+                console.log(res.data)
+                this.user = res.data.data
+                this.user.id = this.id
+            })
+        }
+        
         
     }
 }

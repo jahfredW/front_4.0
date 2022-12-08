@@ -5,22 +5,22 @@
      <v-container>
       <Loading></Loading>
      </v-container>
-</template>
+    </template>
     
     <script>
     import { defineComponent } from 'vue';
-    
-    // Components
-    import Thanks from '@/components/ThanksUser.vue';
-    import Loading from '@/components/Loading.vue'
     import router from '@/router';
     
+    // Components
+    import Thanks from '../../components/ThanksUser.vue';
+    import Loading from '../../components/Loading.vue';
+    
     export default defineComponent({
-      name: 'thanks',
+      name: 'userCreated',
     
       components: {
         Thanks,
-        Loading
+        Loading,
       },
 
       mounted(){
@@ -30,11 +30,13 @@
 
       methods: {
         redirection() {
-        console.log('ok');
+        console.log('la');
         setTimeout( () => {
-        router.push( "/dashboard")
+        router.push( "admin/dashboard")
       }, 2000)}
     },
+
+   
+      
     });
     </script>
-    

@@ -57,7 +57,7 @@
       </v-list>
 
       <v-list v-else-if="(!this.checkLocal() && this.checkAdmin() === 'user')"  dense nav>
-        <v-list-item v-for="item in items_private" :key="item.title" :to="item.to" link>
+        <v-list-item v-for="item in this.userTab()" :key="item.title" :to="item.to" link>
           <v-row class="is-flex-direction-row 
             is-justify-content-space-around
             ">
@@ -102,7 +102,7 @@
       
 
       <v-list v-else  dense nav>
-        <v-list-item v-for="item in items_admin" :key="item.title" :to="item.to" link>
+        <v-list-item v-for="item in this.adminTab()" :key="item.title" :to="item.to" link>
           <v-row class="is-flex-direction-row 
             is-justify-content-space-around
             ">
@@ -242,15 +242,21 @@ export default {
 
     items_admin: [
       {
-        title: 'Afficher Membres >',
+        title: 'Gérer Membres >',
         icon: 'mdi-ghost-outline',
         to: '/admin/Dashboard/index',
       },
 
       {
-        title: 'Rechercher Membres >',
+        title: 'Ajouter Membres >',
         icon: 'mdi-alien-outline',
-        to: '/stack',
+        to: '/admin/Dashboard/add',
+      },
+
+      {
+        title: 'Supprimer Membre >',
+        icon: 'mdi-alien-outline',
+        to: '/admin/Dashboard/delete',
       },
     ]
   }),
@@ -266,7 +272,18 @@ export default {
     console.log("admin : " + this.checkAdmin())
   },
 
+
   methods: {
+
+    adminTab(){
+        let adminTab = [].concat(this.items_public, this.items_private, this.items_admin);
+        return adminTab;
+    },
+
+    userTab(){ 
+        let userTab = [].concat(this.items_public, this.items_private);
+        return userTab;
+    },
     // vérifie si le token existe
     checkLocal() {
       return localStorage.token === undefined;

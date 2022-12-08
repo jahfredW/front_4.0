@@ -21,6 +21,18 @@
       Thanks,
       Loading
     },
+
+    methods: {
+    redirection() {
+      setTimeout( () => {
+        router.push({ name : "UserIndex"})
+      }, 2000)
+    }
+    },
+
+   mounted() {
+    this.redirection();
+}
   });
   </script>
   

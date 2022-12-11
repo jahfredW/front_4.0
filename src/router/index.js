@@ -32,6 +32,7 @@ const router = createRouter({
         { path: '/thanks', name: 'thanks', component: () => import('../views/public/ThanksView.vue') },
         {path: '/login', name: 'Login', component : () => import ('@/views/auth/Login.vue')},
         { path: '/signup', name: 'Signup', component : () => import ('@/views/auth/Signup.vue')},
+        
       ],
 
     },
@@ -45,6 +46,7 @@ const router = createRouter({
       },
       children : [
         { path: 'projets', name: 'perso', component: () => import('../views/public/ProjetCardView.vue') },
+        { path: 'account', name: 'Account', component : () => import ('@/views/auth/UserAccount.vue')},
 
       ]
 

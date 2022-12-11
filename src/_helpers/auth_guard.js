@@ -53,11 +53,22 @@ export function simpleDecode(){
         console.log(token);
         try{
             let decoded = VueJwtDecode(token)
-            console.log(decoded.exp);
             return checkDate(decoded.exp);
         } catch {
            console.log("Token non défini")
         }
+}
+
+export function decodeToken(){
+    let token = localStorage.getItem('token');
+    try{
+        let decoded = VueJwtDecode(token);
+        return { id : decoded.userId, 
+                email :decoded.userEmail, 
+                isAdmin : decoded.isAdmin};
+    } catch {
+        console.log('Token non défini');
+    }
 }
 
 

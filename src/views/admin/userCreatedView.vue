@@ -30,10 +30,10 @@
 
       methods: {
         redirection() {
-        console.log('ok');
+        console.log('redirection!');
         setTimeout( () => {
-        router.push( "/dashboard")
-      }, 2000)}
+        router.push({ name : "UserIndex"})
+      }, 1000)}
     },
     });
     </script>

@@ -1,7 +1,10 @@
 <template>
-    <div>
+    <v-container>
+        <div class="font-weight-bold text-center text-h5 my-3">Dans ce mode, vous pouver Gérer
+            les utilisateurs
+        </div>
         <router-view/>
-    </div>
+    </v-container>
 </template>
 <script>
 

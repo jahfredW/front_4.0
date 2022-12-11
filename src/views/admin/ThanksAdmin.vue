@@ -32,7 +32,7 @@
         redirection() {
         console.log('la');
         setTimeout( () => {
-        router.push( "admin/dashboard")
+        router.push( "admin/Dashboard/index")
       }, 2000)}
     },
 

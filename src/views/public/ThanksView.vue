@@ -9,6 +9,7 @@
   
   <script>
   import { defineComponent } from 'vue';
+  import router from '@/router';
   
   // Components
   import Thanks from '../../components/Thanks.vue';
@@ -24,9 +25,10 @@
 
     methods: {
     redirection() {
+      console.log("redirect ok")
       setTimeout( () => {
         router.push({ name : "UserIndex"})
-      }, 2000)
+      }, 1000)
     }
     },
 

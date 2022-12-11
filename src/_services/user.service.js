@@ -20,6 +20,7 @@ let getUser = (id) => {
 }
 
 let updateUser = (user) => {
+    console.log('ici' + user.id);
     return Axios.put('api/auth/find/'+ user.id, user)
 }
 

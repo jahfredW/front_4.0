@@ -67,6 +67,7 @@
 
 <script>
 
+import router from '@/router';
 import { accountService } from '../../../_services/account.service';
 export default {
     name: 'UserAdd',    
@@ -81,7 +82,7 @@ export default {
                 email : "",
                 pseudo : "",
                 password : "",
-                isAdmin : "",
+                isAdmin : false,
             },
 
             basicRules : [
@@ -111,11 +112,12 @@ export default {
                 }
                 accountService.addUser(formData)
                 .then( response => {
-                    router.push({ name : 'UserUpdated'})
-                    console.log(response);
+                    alert('Utilisateur créé :)')
+                    router.push('/thanks');
+                    
                 })
                 .catch( error => {
-                    console.log(error);
+                    alert('Email ou mot de passe incorrect');
                 })
             }
         }

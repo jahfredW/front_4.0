@@ -16,18 +16,18 @@ const Axios = axios.create({
 
 // Interceptor des réponses de l'api
 
-Axios.interceptors.response.use(response => {
-    return response
-}, error => {
-    console.log(error.response.status);
-    if(error.response.status == 401){
-        accountService.logout();
-        router.push('/login');
-        alert('Désolé, vous n etes pas autorisé ! ')}
-    else if(error.response.status == 500){
-        alert("Erreur lors de l'enregistrement ! ") 
-    }
-})
+// Axios.interceptors.response.use(response => {
+//     return response
+// }, error => {
+//     if(error.response.status == 401){
+//         accountService.logout();
+//         router.push('/login');
+//         alert('Désolé, vous n etes pas autorisé ! ')}
+//     // else if(error.response.status == 500){
+//     //     alert("Erreur lors de l'enregistrement popo ! ") 
+//     //     location.reload();
+//     // }
+// })
 
 
 

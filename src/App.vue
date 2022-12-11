@@ -148,10 +148,17 @@
 
     <v-app-bar id="app_bar" app image="cover.jpg"  class="is-flex-direction-column">
       <v-app-bar-nav-icon color="white" @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-subtitle class="has-text-white">Menu</v-app-bar-subtitle>
+      <v-app-bar-nav-icon  color="white" @click="back" style="position :absolute; left:34vw;"  >
+          <v-icon small >mdi-arrow-left-bold-outline</v-icon>
+        </v-app-bar-nav-icon>
+        <v-app-bar-nav-icon  color="white" @click="after" style="position :absolute; left:60vw;"  >
+          <v-icon small >mdi-arrow-right-bold-outline</v-icon>
+        </v-app-bar-nav-icon>
+      <!-- <v-app-bar-subtitle class="has-text-white">Menu</v-app-bar-subtitle> -->
     </v-app-bar>
 
     <v-main id="main" style="background-color: #EBECF0">
+      
       <router-view />
     </v-main>
 
@@ -170,7 +177,6 @@
               </a>
             </div>
           </div>
-          
         </v-row>
      
     </v-footer>
@@ -182,6 +188,8 @@
 
 <script>
 import VueJwtDecode from 'jwt-decode';
+import  { simpleDecode }  from '@/_helpers/auth_guard.js';
+import router from '@/router';
 
 export default {
   name: "mainApp",
@@ -236,6 +244,11 @@ export default {
         icon: 'mdi-ghost-outline',
         to: '/user/projets',
       },
+      {
+        title: 'Gérer Mon compte >',
+        icon: 'mdi-ghost-outline',
+        to: '/user/account',
+      },
 
       
     ],
@@ -248,15 +261,9 @@ export default {
       },
 
       {
-        title: 'Ajouter Membres >',
+        title: 'Ajouter un Membre >',
         icon: 'mdi-alien-outline',
         to: '/admin/Dashboard/add',
-      },
-
-      {
-        title: 'Supprimer Membre >',
-        icon: 'mdi-alien-outline',
-        to: '/admin/Dashboard/delete',
       },
     ]
   }),
@@ -270,10 +277,19 @@ export default {
     this.drawer = null;
     console.log("check : " + !this.checkLocal())
     console.log("admin : " + this.checkAdmin())
+    console.log(simpleDecode());
   },
 
 
   methods: {
+
+    back(){
+      router.go(-1);
+    },
+
+    after(){
+      router.go(+1);
+    },
 
     adminTab(){
         let adminTab = [].concat(this.items_public, this.items_private, this.items_admin);
@@ -364,8 +380,14 @@ export default {
   }
 
   
-  #app-bar{
-    height: 8vw;
+  #app_bar{
+    position: relative;
+  }
+
+  #i{
+    position: absolute;
+    color: white;
+    right : 1vw;
   }
 }
 

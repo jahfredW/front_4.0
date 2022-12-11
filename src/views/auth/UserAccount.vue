@@ -53,24 +53,26 @@
 import router from '@/router'
 import  { userService } from '@/_services'
 import { cloneVNode } from 'vue'
+import { decodeToken } from '../../_helpers/auth_guard'
 
 
 export default {
-    name: 'Uedit',
+    name: 'UeditByUser',
     // propriété de param accessible dans le scope, récupération de l'id
     // ici la props n'est pas dérivée du composant, mais récupérée via le routeur ( props : true )
-    props: ['id', 'email'],
     data() {
         return {
             valid: false,
             user : {
-                isAdmin : false,
+                id: 0 ,
+                isAdmin: "",
                 pseudo : "",
+                email : "",
             },
             admin : "",
             // définition des règles de validation
 
-            pseudoRule : [
+            pseudoRules : [
                 v => !!v || "Le champs ne peut pas être vide ",
                 // regex d'exclusion de caractères sprécifiques. 
                 v => !/[-!$%^&*()_+|~=`\\#{}\[\]:";'<>?,.\/]/.test(v) || "les caractères spéciaux sont interdits",
@@ -108,6 +110,7 @@ export default {
         delete(){
             userService.deleteUser(this.id)
             .then( res => {
+                localStorage.removeItem('token');
                 console.log(res);
                 router.push('/thanks')
             })
@@ -131,26 +134,20 @@ export default {
     },
 
     mounted(){
-        
+        let infoUser = decodeToken();
+        console.log('info_user :' + infoUser)
         // récupère les datas de l'utilisateur via son ID ( requete get en api )
-        if(this.id){
-            userService.getUserAdminId(this.id)
+        if(infoUser.id > 0){
+            userService.getUser(infoUser.id)
         .then( res => {
-            console.log(res.data)
-            this.user = res.data.data
-            this.user.id = this.id
+            console.log(res.data.data)
+            this.user.id = res.data.data.id
+            this.user.isAdmin = res.data.data.isAdmin
+            this.user.pseudo = res.data.data.pseudo
+            this.user.email = res.data.data.email
         })
         .catch(err => console.log(err))
         }
-        if(this.email){
-            userService.getUserAdminEmail(this.email)
-            .then( res => {
-                console.log(res.data)
-                this.user = res.data.data
-                this.user.id = this.id
-            })
-        }
-        
         
     }
 }

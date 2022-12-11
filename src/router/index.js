@@ -1,37 +1,31 @@
+import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
 
-
-import { createRouter, createWebHashHistory, createMemoryHistory } from 'vue-router'
-import PublicLayout from '@/views/public/Layout.vue'
-import AdminLayout from '@/views/admin/Layout.vue'
-import Dashboard from '@/views/admin/Dashboard.vue'
 import { decode } from '@/_helpers/auth_guard'
 import { simpleDecode } from '@/_helpers/auth_guard.js'
 import { decodeAdmin } from '../_helpers/auth_guard'
 
 
+import { PublicLayout, HomeView, TechnoView, TestFormView, 
+  ThanksView, ProjectCardView  } from '../views/public'
 
+import { ThanksAdminView, DashboardView, UserUpdatedView, UserIndexView,
+UserEditView, UserAddView, AdminLayout} from '../views/admin'
 
+import { SignupView, LoginView, UserAccountView } from '../views/auth'
 
-const router = createRouter({
-  history: createWebHashHistory(),
-  routes: [
+const routes = [
     // routes publiques 
     {
       path : '/',
       name: 'public',
       component: PublicLayout,
       children : [
-        { path: '/', name: 'Home view', component: () => import('../views/public/HomeView.vue')},
-        { path: '/stack', name: 'stack',
-          // route level code-splitting
-          // this generates a separate chunk (About.[hash].js) for this route
-          // which is lazy-loaded when the route is visited.
-          component: () => import('../views/public/TechnoView.vue')
-        },
-        { path: '/contact', name: 'contact', component: () => import('../views/public/testFormVue.vue') },
-        { path: '/thanks', name: 'thanks', component: () => import('../views/public/ThanksView.vue') },
-        {path: '/login', name: 'Login', component : () => import ('@/views/auth/Login.vue')},
-        { path: '/signup', name: 'Signup', component : () => import ('@/views/auth/Signup.vue')},
+        { path: '/', name: 'Home view', component: HomeView },
+        { path: '/stack', name: 'stack', component: TechnoView},
+        { path: '/contact', name: 'contact', component: TestFormView },
+        { path: '/thanks', name: 'thanks', component : ThanksView },
+        {path: '/login', name: 'Login', component : LoginView},
+        { path: '/signup', name: 'Signup', component : SignupView},
         
       ],
 
@@ -45,11 +39,9 @@ const router = createRouter({
         decode();
       },
       children : [
-        { path: 'projets', name: 'perso', component: () => import('../views/public/ProjetCardView.vue') },
-        { path: 'account', name: 'Account', component : () => import ('@/views/auth/UserAccount.vue')},
-
-      ]
-
+        { path: 'projets', name: 'perso', component: ProjectCardView},
+        { path: 'account', name: 'Account', component : UserAccountView},
+]
     },
 
     {
@@ -57,22 +49,16 @@ const router = createRouter({
       name: 'admin',
       component : AdminLayout,
       children : [
-        { 
-          path : 'usercreated', name : 'userCreated', component : () => import('@/views/admin/ThanksAdmin.vue'),
-        },
-        { path : 'dashboard', name :"dashboard", component : () => import('@/views/admin/Dashboard.vue'),
-        },
-        {
-          path : 'dashboard/userUpdated', name : 'UserUpdated', component :() => import('@/views/admin/userCreatedView.vue'),
-        },
-        { path : 'dashboard/index', name : "UserIndex", component : () => import ('@/views/admin/users/UserIndex.vue') },
-        { path : 'dashboard/edit/:id(\\d+)', name : "uEdit", props : true, component : () => import ('@/views/admin/users/UserEdit.vue') },
-        { path : 'dashboard/custom/:id(\\d+)', name : "uCustom", props : true, component : () => import ('@/views/admin/users/UserCustom.vue') },
-        { path : 'dashboard/add', name : "add", component : () => import ('@/views/admin/users/UserAdd.vue') },
-        {
-          path: '/:pathMatch(.*)*', redirect: '/admin/dashboard' // ou component : NotFound
-        }
-
+        { path : 'usercreated', name : 'userCreated', component : ThanksAdminView},
+        { path : 'dashboard', name :"dashboard", component : DashboardView},
+        {path : 'dashboard/userUpdated', name : 'UserUpdated', component : UserUpdatedView},
+        { path : 'dashboard/index', name : "UserIndex", component : UserIndexView },
+          //  ? permet de rendre un params optionnel
+        { path : 'dashboard/edit/:id(\\d+)?', name : "uEdit", props : true, component : UserEditView },
+        // { path : 'dashboard/custom/:id(\\d+)?', name : "uCustom", props : true, component : () => import ('@/views/admin/users/UserCustom.vue') },
+        { path : 'dashboard/add', name : "add", component : UserAddView },
+        {path: '/:pathMatch(.*)*', redirect: '/admin/dashboard' // ou component : NotFound
+}
       ],
       
     },
@@ -81,7 +67,11 @@ const router = createRouter({
     {path: '/:pathMatch(.*)*', redirect: '/'  }
 
    ]
-})
+
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes})
 
 
 // verouillage de la partie admin 
@@ -92,5 +82,7 @@ router.beforeEach( (to, from, next) => {
   }
   next();
 })
+
+
 
 export default router

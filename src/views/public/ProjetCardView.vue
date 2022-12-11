@@ -1,7 +1,7 @@
 <template>
   <v-container class="container has-text-centered">
     <v-row class="custom is-justify-content-space-evenly">
-    <v-col class="custom-col "
+    <v-col class="custom-col"
     v-for="item in this.testprop"
    >
       <ProjetCard
@@ -33,6 +33,12 @@
 </script>
 
 <style>
+
+.custom{
+  box-sizing: border-box;
+  margin-top: 12vh;
+}
+
 
 .container {
   box-sizing: border-box;

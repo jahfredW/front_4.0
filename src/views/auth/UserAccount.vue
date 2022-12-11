@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mt-15">
         <div class="text-center">
             <div class="font-weight-bold text-h5 my-3">Modifier l'utilisateur : </div>
         </div>
@@ -22,28 +22,27 @@
                         required > 
                     </v-text-field>
                     </v-col>
-                    <v-col cols="12">
-                        <v-checkbox
-                        v-model="user.isAdmin"
-                        :label="getAdmin"
-                        required > 
-                    </v-checkbox>
+                </v-row>
+                <v-row>
+                    <v-col cols="6" class="text-center">
+                        <v-btn
+                            @click.prevent="this.edit()"
+                            :disabled="!valid"
+                            type="submit"
+                            color="success">
+                            Modifier
+                        </v-btn>
+                    </v-col>
+                    <v-col cols="6" class="text-center">
+                        <v-btn
+                            @click.prevent="this.delete()"
+                            :disabled="!valid"
+                            type="submit"
+                            color="success">
+                            Supprimation
+                        </v-btn>
                     </v-col>
                 </v-row>
-                <v-btn
-                @click="this.edit()"
-                :disabled="!valid"
-                type="submit"
-                color="success">
-                Modifier
-                </v-btn>
-                <v-btn
-                @click="this.delete()"
-                :disabled="!valid"
-                type="submit"
-                color="success">
-                Supprimer
-                </v-btn>
             </v-container>
         </v-form>
     </div>
@@ -52,7 +51,6 @@
 <script>
 import router from '@/router'
 import  { userService } from '@/_services'
-import { cloneVNode } from 'vue'
 import { decodeToken } from '../../_helpers/auth_guard'
 
 
@@ -78,11 +76,6 @@ export default {
                 v => !/[-!$%^&*()_+|~=`\\#{}\[\]:";'<>?,.\/]/.test(v) || "les caractères spéciaux sont interdits",
                 // v => v.lenght <= 10 || "La saisie ne peut excéder 10 caractères"
             ],
-            basicRules : [
-                v => !!v || "Le champs ne peut pas être vide ",
-                v => !/[-!$%^&*()_+|~=`\\#{}\[\]:";'<>?,.\/]/.test(v) || "les caractères spéciaux sont interdits",
-                // v => v.lenght <= 20 || "La saisie ne peut excéder 20 caractères"
-            ],
             emailRules: [
             /* v => !!signifie prendre v, et le contraindre à un type booléen en appliquant NOT deux fois. 
             Ainsi, la fonction de filtre supprime essentiellement toutes les valeurs fausses (0, null, undefined) de this._data. */
@@ -96,8 +89,10 @@ export default {
     methods: {
         // Envoie les modificationsde l'utilisateur à l'api  
         edit(){
+            
             userService.updateUser(this.user)
             .then( res => {
+                console.log('yo')
                 console.log(res);
                 router.push('/thanks')
             })
@@ -108,7 +103,7 @@ export default {
         },
 
         delete(){
-            userService.deleteUser(this.id)
+            userService.deleteUser(this.user.id)
             .then( res => {
                 localStorage.removeItem('token');
                 console.log(res);
@@ -121,21 +116,10 @@ export default {
         }
     },
 
-    computed : {
-        getAdmin(){
-            if (this.user.isAdmin){
-            this.admin = "Je suis un administrateur"
-        } else {
-            this.admin ="Je ne suis pas un administrateur"
-        }
-        return this.admin
-        }
-        
-    },
+
 
     mounted(){
         let infoUser = decodeToken();
-        console.log('info_user :' + infoUser)
         // récupère les datas de l'utilisateur via son ID ( requete get en api )
         if(infoUser.id > 0){
             userService.getUser(infoUser.id)

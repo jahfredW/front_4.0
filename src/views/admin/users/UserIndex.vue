@@ -13,7 +13,7 @@
         </v-row>
         <v-btn
             class="mb-5"
-            @click="this.search()"
+            @click.prevent="this.search()"
             :disabled="!valid"
             type="submit"
             color="success">
@@ -82,13 +82,16 @@ export default {
             }
             
         userService.getUserAdminEmail(formdata)
-        .then( data => {
-            if(data){
-                console.log(data)
-                this.$router.push({ name : 'uEdit', body:{ email: this.email}, params : { id : data.data.data.id}});
+        .then( res => {
+            if(res){
+                console.log('ici !')
+                this.$router.push({ name : 'uEdit', params : { id : res.data.data.id }});
             }
         })
-        .catch()
+        .catch( err => {
+            // un 401 renvoyé par l'api envoue le message ici 
+            alert('Erreur, aucun nom en bdd ! ') 
+        })
         },
 
         goEdit(id){
@@ -128,9 +131,6 @@ export default {
     mounted(){
      
         console.log(window.innerWidth > 500);
-        
-        
-        console.log(this.$route.params.id);
         this.submit();
     },
 

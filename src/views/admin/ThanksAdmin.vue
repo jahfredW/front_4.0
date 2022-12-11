@@ -1,11 +1,14 @@
-<template>
+<template  >
+  <div style=" margin-top: 10vh;" >
     <v-container>
       <Thanks></Thanks>
     </v-container>
      <v-container>
       <Loading></Loading>
      </v-container>
-    </template>
+  </div>
+    
+</template>
     
     <script>
     import { defineComponent } from 'vue';
@@ -32,7 +35,7 @@
         redirection() {
         console.log('la');
         setTimeout( () => {
-        router.push( "admin/Dashboard/index")
+          router.push({ name : "UserIndex"})
       }, 2000)}
     },
 
@@ -40,3 +43,4 @@
       
     });
     </script>
+

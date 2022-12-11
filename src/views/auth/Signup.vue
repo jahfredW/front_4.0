@@ -1,6 +1,6 @@
 <template >
-  <v-container class="w-75 mt-15">
-    <v-form @submit.prevent="submit" id="form" v-model="valid" ref="form" lazy-validation>
+  <v-container class="container mt-15">
+    <v-form @submit="submit" id="form" v-model="valid" ref="form" lazy-validation>
       <v-banner class="mb-5">
         Formulaire d'inscription :
       </v-banner>
@@ -24,36 +24,36 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-        <v-text-field class="w-100 text-left field" v-if="showPassword" type="text" v-model="password" :rules="passwordRules"
+        <v-text-field class="w-100 text-left field"  :type="this.type1" v-model="password" :rules="passwordRules"
+          :counter="10" label="Password" required>
+            <v-icon class="icon" @click.prevent="toggleShow1">
+              mdi-eye-check
+            </v-icon>
+        </v-text-field>
+        <!-- <v-text-field class="w-100 text-left field" v-else type="password" v-model="password" :rules="passwordRules"
           :counter="10" label="Password" required>
             <v-icon class="icon" @click.prevent="toggleShow">
               mdi-eye-check
             </v-icon>
-        </v-text-field>
-        <v-text-field class="w-100 text-left field" v-else type="password" v-model="password" :rules="passwordRules"
-          :counter="10" label="Password" required>
-            <v-icon class="icon" @click.prevent="toggleShow">
-              mdi-eye-check
-            </v-icon>
-        </v-text-field>
+        </v-text-field> -->
       </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-text-field class="w-100 text-left field" v-if="verifPassword" type="text" v-model="verification" :rules="verifRules" :counter="10" label="Confirmez" required>
-              <v-icon class="icon" @click.prevent="toggleShowVerif">
+          <v-text-field class="w-100 text-left field" :type="this.type2" v-model="verification" :rules="verifRules" :counter="10" label="Confirmez" required>
+              <v-icon class="icon" @click.prevent="toggleShow2">
                 mdi-eye-check
               </v-icon>
           </v-text-field>
-          <v-text-field class="w-100 text-left field" v-else type="password" v-model="verification" :rules="verifRules" :counter="10" label="Confirmez" required>
+          <!-- <v-text-field class="w-100 text-left field" v-else type="password" v-model="verification" :rules="verifRules" :counter="10" label="Confirmez" required>
               <v-icon class="icon" @click.prevent="toggleShowVerif">
                 mdi-eye-check
               </v-icon>
-          </v-text-field>
+          </v-text-field> -->
         </v-col>
       </v-row>
       <v-col cols="12">
-        <v-btn :disabled="!valid" color="success" class="mr-4" @keyup.enter="validate" @click.prevent="submit">Validate
+        <v-btn :disabled="!valid" color="success" class="mr-4" @keyup.enter="submit" @click.prevent="submit">Validate
         </v-btn>
       </v-col>
     </v-form>
@@ -72,6 +72,8 @@ export default {
   data() {
     return {
       valid: true,
+      type1 : "password",
+      type2 : "password",
       nom: "",
       prenom: "",
       pseudo: "",
@@ -80,6 +82,7 @@ export default {
       verification: '',
       showPassword: false,
       verifPassword: false,
+      passwordListe : [],
       basicRules: [
         v => !!v || "Ce champs ne peut aps être vide!",
         v => !/[-!$%^&*()_+|~=`\\#{}\[\]:";'<>?,.\/]/.test(v) || "les caractères spéciaux sont interdits"
@@ -99,7 +102,8 @@ export default {
       ],
       verifRules: [
         v => !!v || 'PAssword is required',
-        v => v === this.password || ' Le mot de passe de correspond pas !'
+        v => v == this.password || ' Le mot de passe de correspond pas !',
+        v => v && this.passwordListe.includes(v)
       ]
     }
   },
@@ -112,7 +116,6 @@ export default {
 
       if (this.$refs.form.validate()) {
         var formData = new FormData();
-        console.log(this.checkLocal());
         formData = {
           name: this.nom,
           surname: this.prenom,
@@ -140,13 +143,22 @@ export default {
       }
     },
 
-    toggleShow() {
-      this.showPassword = !this.showPassword;
+    toggleShow1() {
+      if(this.type1 == "password"){
+        this.type1 = "text";
+      } else {
+        this.type1 = "password";
+      }
     },
 
-    toggleShowVerif(){
-      this.verifPassword = !this.verifPassword;
+    toggleShow2(){
+      if(this.type2 == "password"){
+        this.type2 = "text";
+      } else {
+        this.type2 = "password";
+      }
     },
+      
 
     checkLocal() {
       return localStorage.user === undefined;
@@ -157,13 +169,14 @@ export default {
       return this.verification;
     },
   },
+}
 
   // computed: {
   //   buttonLabel() {
   //     return (this.showPassword) ? "Hide" : "Show";
   //   }
   // }
-}
+
 </script>
 
 

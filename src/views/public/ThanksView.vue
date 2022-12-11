@@ -1,10 +1,12 @@
 <template>
+  <div style=" margin-top: 10vh;" >
   <v-container>
     <Thanks></Thanks>
   </v-container>
    <v-container>
     <Loading></Loading>
    </v-container>
+   </div>
   </template>
   
   <script>
@@ -25,9 +27,9 @@
 
     methods: {
     redirection() {
-      console.log("redirect ok")
+      console.log("c'est bien ici")
       setTimeout( () => {
-        router.push({ name : "UserIndex"})
+        router.push('user/account')
       }, 1000)
     }
     },

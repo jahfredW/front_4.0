@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="container">
         <v-row >
             <v-col cols="12" class="has-text-centered">
                 <h1 class="is-size-4">Technologies utilisées pour la création de vos projets</h1>

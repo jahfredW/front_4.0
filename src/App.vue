@@ -7,7 +7,7 @@
           <v-list-item-title class="text-h6" id="menu">
           </v-list-item-title>
           <v-list-item-subtitle>
-            Navigation
+            WELCOME !
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -145,14 +145,14 @@
         <v-divider></v-divider>
       </v-list>
     </v-navigation-drawer> 
-
-    <v-app-bar id="app_bar" app image="cover.jpg"  class="is-flex-direction-column">
+    <!-- gestion de l'affichage des fléches  -->
+    <v-app-bar @mouseenter="activeIcon = !activeIcon" @mouseleave="activeIcon = !activeIcon" id="app_bar"  class="is-flex-direction-column">
       <v-app-bar-nav-icon color="white" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-nav-icon  color="white" @click="back" style="position :absolute; left:34vw;"  >
-          <v-icon small >mdi-arrow-left-bold-outline</v-icon>
+          <v-icon v-if="activeIcon || sizing()" small >mdi-arrow-left-bold-outline</v-icon>
         </v-app-bar-nav-icon>
         <v-app-bar-nav-icon  color="white" @click="after" style="position :absolute; left:60vw;"  >
-          <v-icon small >mdi-arrow-right-bold-outline</v-icon>
+          <v-icon v-if="activeIcon || sizing()" small >mdi-arrow-right-bold-outline</v-icon>
         </v-app-bar-nav-icon>
       <!-- <v-app-bar-subtitle class="has-text-white">Menu</v-app-bar-subtitle> -->
     </v-app-bar>
@@ -162,7 +162,7 @@
       <router-view />
     </v-main>
 
-    <v-footer app id="footer" padless image="cover.jpg">
+    <v-footer app id="footer" padless >
       <v-row justify="center">
           <div id="links" v-for="(link, i) in importantLinks" :key="i"  link class="subheading mx-3"
             target="_blank">
@@ -195,6 +195,7 @@ export default {
   name: "mainApp",
 
   data: () => ({
+    activeIcon : false,
     drawer: null,
     importantLinks: [
       {
@@ -280,8 +281,20 @@ export default {
     console.log(simpleDecode());
   },
 
+  computed : {
+    
+  },
+
 
   methods: {
+
+    sizing(){
+      let size = true;
+      if(window.innerWidth > 820){
+        size = !size
+      } 
+      return size;
+    },
 
     back(){
       router.go(-1);
@@ -360,11 +373,15 @@ export default {
   min-height: 100vh;
 }
 
+#app_bar{
+  background-image: url("/header.jpg");
+}
+
 
 
 #footer {
-  background-image: url("../cover.jpg");
   padding: 1vw;
+  background-image: url("/header.jpg");
 }
 
 @media screen and (max-width: 450px){

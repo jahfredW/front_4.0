@@ -24,8 +24,18 @@ let updateUser = (user) => {
     return Axios.put('api/auth/find/'+ user.id, user)
 }
 
-let deleteUser = (id) => {
+let updateUserByAdmin = (user) => {
+    console.log('ici' + user.id);
+    return Axios.put('api/admin/update/'+ user.id, user)
+}
+
+let deleteUserByAdmin = (id) => {
     return Axios.delete('api/admin/deleteuser/' + id)
+}
+
+
+let deleteUser = (id) => {
+    return Axios.delete('api/auth/deleteuser/' + id)
 }
 
 
@@ -41,5 +51,7 @@ export const userService = {
     getUserAdminId,
     deleteUser,
     getUserByEmail,
-    getUserAdminEmail
+    getUserAdminEmail,
+    updateUserByAdmin,
+    deleteUserByAdmin
 }

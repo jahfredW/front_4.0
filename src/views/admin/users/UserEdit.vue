@@ -9,7 +9,7 @@
                     <v-col cols="12">
                         <v-text-field
                         v-model="user.pseudo"
-                        :rules="pseudoRules"
+                        :rules="pseudoRule"
                         label="Pseudo"
                         required > 
                     </v-text-field>
@@ -31,14 +31,14 @@
                     </v-col>
                 </v-row>
                 <v-btn
-                @click="this.edit()"
+                @click.prevent="this.edit()"
                 :disabled="!valid"
                 type="submit"
                 color="success">
                 Modifier
                 </v-btn>
                 <v-btn
-                @click="this.delete()"
+                @click.prevent="this.delete()"
                 :disabled="!valid"
                 type="submit"
                 color="success">
@@ -52,7 +52,7 @@
 <script>
 import router from '@/router'
 import  { userService } from '@/_services'
-import { cloneVNode } from 'vue'
+
 
 
 export default {
@@ -91,13 +91,15 @@ export default {
         }
     },
 
+
     methods: {
         // Envoie les modificationsde l'utilisateur à l'api  
         edit(){
-            userService.updateUser(this.user)
+            userService.updateUserByAdmin(this.user)
             .then( res => {
+                console.log('ok')
                 console.log(res);
-                router.push('/thanks')
+                router.push({name : 'userCreated'})
             })
             .catch( err => {
                 console.log('erreur !')
@@ -106,10 +108,10 @@ export default {
         },
 
         delete(){
-            userService.deleteUser(this.id)
+            userService.deleteUserByAdmin(this.id)
             .then( res => {
                 console.log(res);
-                router.push('/thanks')
+                router.push('userCreated')
             })
             .catch( err => {
                 console.log('erreur !')
@@ -131,7 +133,6 @@ export default {
     },
 
     mounted(){
-        
         // récupère les datas de l'utilisateur via son ID ( requete get en api )
         if(this.id){
             userService.getUserAdminId(this.id)

@@ -62,7 +62,7 @@
       :disabled="!valid"
       color="success"
       class="mb-4"
-      @click="validate"
+      @click.prevent="validate"
     >
       Soumettre
     </v-btn>
@@ -70,17 +70,11 @@
     <v-btn
       color="error"
       
-      @click="reset"
+      @click.prevent="reset"
     >
       Effacer
     </v-btn>
 
-    <!-- <v-btn
-      color="warning"
-      @click="resetValidation"
-    >
-      Validation
-    </v-btn> -->
 
   </div>
     
@@ -162,7 +156,7 @@ import router from '../router/index'
             question : this.question,
             agree : this.agree
           }
-          axios.post('http://127.0.0.1:3000/api/members', 
+          axios.post('https://fredgruwedev.com/api/members', 
           
             formData
           )

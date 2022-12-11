@@ -1,14 +1,14 @@
-import axios from 'axios'
+// import axios from 'axios'
 
-let baseURL
+// let baseURL
 
 // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-  baseURL = 'http://127.0.0.1:3000/api'
+//   baseURL = 'http://127.0.0.1:3000/api'
 // } else {
-  // baseURL = 'https://fredgruwedev.com/api/'
+//   baseURL = 'https://fredgruwedev.com/api/'
 // }
  
-export const HTTP = axios.create(
-  {
-    baseURL: baseURL
-  })
+// export const HTTP = axios.create(
+//   {
+//     baseURL: baseURL
+//   })

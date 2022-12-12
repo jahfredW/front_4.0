@@ -110,7 +110,7 @@ export default {
             case 'mysql':
                 logo = logoMysql;
                 link = "https://www.mysql.com/fr/";
-                description = "MySQL (prononcer  est un système de gestion de bases de données relationnelles (SGBDR). Il est distribué sous une double licence GPL et propriétaire. Il fait partie des logiciels de gestion de base de données les plus utilisés au monde"
+                description = "MySQL est un système de gestion de bases de données relationnelles (SGBDR). Il est distribué sous une double licence GPL et propriétaire. Il fait partie des logiciels de gestion de base de données les plus utilisés au monde"
                 break;
             default:
                 console.log('error');

@@ -28,7 +28,7 @@
       <v-col cols="12" >
         <div  >
           <v-img class="mx-auto mt-16"
-            :src="logo"
+            src="kameha.png"
             max-height="150"
             max-width="250" >
         </v-img>

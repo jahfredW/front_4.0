@@ -2,7 +2,7 @@
     <v-container class="container">
         <v-row >
             <v-col cols="12" class="has-text-centered">
-                <h1 class="is-size-4">Technologies utilisées pour la création de vos projets</h1>
+                <h1 class="text-h4">Technologies utilisées pour la création de vos projets :</h1>
             </v-col>
         </v-row>
         <v-divider></v-divider>

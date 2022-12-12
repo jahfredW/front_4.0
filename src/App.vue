@@ -57,7 +57,7 @@
       </v-list>
 
       <v-list v-else-if="(!this.checkLocal() && this.checkAdmin() === 'user')"  dense nav>
-        <v-list-item v-for="item in this.userTab()" :key="item.title" :to="item.to" link>
+        <v-list-item v-for="item in userTabConstruct" :key="item.title" :to="item.to" link>
           <v-row class="is-flex-direction-row 
             is-justify-content-space-around
             ">
@@ -102,7 +102,7 @@
       
 
       <v-list v-else  dense nav>
-        <v-list-item v-for="item in this.adminTab()" :key="item.title" :to="item.to" link>
+        <v-list-item v-for="item in adminTabConstruct" :key="item.title" :to="item.to"  link>
           <v-row class="is-flex-direction-row 
             is-justify-content-space-around
             ">
@@ -216,15 +216,21 @@ export default {
     ],
 
     items_public: [
+    {
+        title: 'Inscription >',
+        icon: 'mdi-account-edit',
+        to: '/signup'
+      },
       {
         title: 'Accueil >',
         icon: 'mdi-home',
         to: '/'
       },
+      
       {
-        title: 'Inscription >',
-        icon: 'mdi-account-edit',
-        to: '/signup'
+        title: 'Qui suis-je? >',
+        icon: 'mdi-alien-outline',
+        to: '/presentation',
       },
       {
         title: 'Mon stack >',
@@ -266,7 +272,10 @@ export default {
         icon: 'mdi-alien-outline',
         to: '/admin/Dashboard/add',
       },
-    ]
+    ],
+    userTab : [],
+    adminTab : []
+
   }),
 
   updated(){
@@ -282,7 +291,16 @@ export default {
   },
 
   computed : {
-    
+    userTabConstruct(){ 
+        this.userTab = [].concat(this.items_public, this.items_private);
+        this.userTab = this.userTab.splice(1, this.userTab.length -1);
+        return this.userTab;
+    },
+
+    adminTabConstruct(){
+      this.adminTab = [].concat(this.items_public, this.items_private, this.items_admin);
+      return this.adminTab.splice(1, this.adminTab.length -1);
+    }
   },
 
 

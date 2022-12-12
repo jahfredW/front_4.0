@@ -6,7 +6,7 @@ import { decodeAdmin } from '../_helpers/auth_guard'
 
 
 import { PublicLayout, HomeView, TechnoView, TestFormView, 
-  ThanksView, ProjectCardView  } from '../views/public'
+  ThanksView, ProjectCardView, PresentationView  } from '../views/public'
 
 import { ThanksAdminView, DashboardView, UserUpdatedView, UserIndexView,
 UserEditView, UserAddView, AdminLayout} from '../views/admin'
@@ -26,6 +26,7 @@ const routes = [
         { path: '/thanks', name: 'thanks', component : ThanksView },
         {path: '/login', name: 'Login', component : LoginView},
         { path: '/signup', name: 'Signup', component : SignupView},
+        { path: '/presentation', name : 'Presentation', component : PresentationView }
         
       ],
 
@@ -70,7 +71,7 @@ const routes = [
 
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/'),
   routes})
 
 

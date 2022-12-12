@@ -1,14 +1,21 @@
 <template>
   <v-container class="w-75 mt-15">
+    <v-row class="mb-10">
+      <v-col cols="12"  xs="12" sm="12" md="8" lg="8"  class="my-auto text-center">
+        <h2 class="text-h3">Connection ! </h2>
+      </v-col>
+      <v-col cols="12"  xs="12" sm="12" md="4" lg="4">
+        <v-img height=250 src="reine.png">
+        </v-img>
+      </v-col>
+    </v-row>
     <v-form 
       @submit.prevent="validate"
             id="form"
             v-model="valid"
             ref="form" 
             lazy-validation>
-            <v-banner class="mb-5">
-              Entrez votre email et votre mot de passe :
-            </v-banner >
+            
             <v-row >
                 <v-col
                     cols="12"
@@ -37,7 +44,7 @@
                 </v-text-field>
                 </v-col>
                 </v-row>
-                    <v-col clos="12">
+                    <v-col cols="12" class="text-center mt-5">
                         <v-btn
                         :disabled="!valid"
                         color="success"
@@ -75,7 +82,7 @@ export default {
     ],
     passwordRules: [
       v => !!v || 'Password is required',
-      v => v.length <= 10 || 'Name must be less than 10 characters',
+      v => v.length <= 24 || 'Name must be less than 10 characters',
     ],
   }),
 

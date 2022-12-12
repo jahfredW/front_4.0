@@ -8,8 +8,8 @@ et paramètre le header */
 
 
 const Axios = axios.create({
-    // baseURL: 'https://fredgruwedev.com'
-    baseURL : 'http://127.0.0.1:3000'
+    baseURL: 'https://fredgruwedev.com'
+    // baseURL : 'http://127.0.0.1:3000'
 })
 
 // Axios.defaults.headers.common["Authorization"] =

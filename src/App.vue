@@ -159,7 +159,7 @@
 
     <v-main id="main" style="background-color: #EBECF0">
       
-      <router-view />
+      <router-view :key="$route.fullPath"></router-view>
     </v-main>
 
     <v-footer app id="footer" padless >
@@ -371,7 +371,22 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Roboto:wght@300&display=swap');
+
+
+@font-face {
+  font-family: "Roboto";
+  src: local("Roboto"),
+  url(./fonts/Roboto-Light.ttf) format("truetype");
+}
+
+@font-face{
+  font-family: "Poppins";
+  src: local("Poppins"),
+  url(./fonts/poppins/Poppins-Light.ttf) format("truetype");
+}
+
+
+
 
 #main{
   font-family: 'Poppins', sans-serif;

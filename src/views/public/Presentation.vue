@@ -25,9 +25,9 @@
         <v-row class="my-10">
             <v-col class="my-auto" cols="12"  xs="12" sm="12" md="8" lg="7">
                 <h1 class="text-h4 mb-10">Des applications sécurisées ... </h1>
-                <p>L'utilisation des dernières technologies web, permettant une réelle sécurisation de voytre site, 
-                    de vos donnéess ainsi que celles de vos utilisateurs! 
-                    Crytage de mots de passe, jsonwebtoken, urlGuadians vous permettront d'être sereins quel quel
+                <p>L'utilisation des dernières technologies web, permettant une réelle sécurisation de votre site, 
+                    de vos données ainsi que celles de vos utilisateurs! 
+                    Crytage de mots de passe, jsonwebtoken, urlGuadians vous permettront d'être sereins quel que
                     soit le mode d'utilisation de vos ressources web.
                 </p>
             </v-col>
@@ -44,7 +44,7 @@
                 <p>Du site web statique à l'application full stack E-commerce, je m'adapte à votre projet 
                     en garantissant une evolutivité de votre site en fonction de vos futurs besoins. 
                     Ceci est rendu possible par l'utilisation des dernières technologies web et par la maitrise
-                    de frameworks variés codé dans différents langages de programmation.
+                    de frameworks variés, codés dans différents langages de programmation.
                 </p>
             </v-col>
         </v-row>

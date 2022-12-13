@@ -27,7 +27,7 @@
       </v-col>
       <v-col cols="12" >
         <div  >
-          <v-img class="mx-auto mt-16"
+          <v-img class="mx-auto mt-5"
             src="kameha.png"
             max-height="150"
             max-width="250" >
